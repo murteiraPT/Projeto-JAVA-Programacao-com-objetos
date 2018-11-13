@@ -74,4 +74,10 @@ public class SchoolManager {
 
   //FIXME implement other methods (in general, one for each command in sth-app)
   
+  public Person newUser(String name, int phoneNumber){
+    int numberOfUsers = _school.getNumberOfPersons();
+    Person person = new Person(numberOfUsers, name, phoneNumber);
+    return person;
+  }
+
 }

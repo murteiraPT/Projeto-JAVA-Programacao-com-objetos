@@ -11,8 +11,8 @@ import java.util.List;
 
 public class Course implements java.io.Serializable{
 	private String _name;
-	private ArrayList<Discpline> _disciplineList = new ArrayList<>;
-	private ArrayList<Student> _studentList = new ArrayList<>;
+	private ArrayList<Discpline> _disciplineList = new ArrayList<>();
+	private ArrayList<Student> _studentList = new ArrayList<>();
 
 	public Course(String name){
 		_name = name;
@@ -27,7 +27,7 @@ public class Course implements java.io.Serializable{
 			throw BadEntryException;
 		_disciplineList.add(discpline);
 	}
-	
 
+	protected void 
 	
 }

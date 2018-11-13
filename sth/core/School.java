@@ -49,7 +49,7 @@ public class School implements java.io.Serializable {
     }
 
     protected void addPerson(Person person) throws BadEntryException{
-        if (_personMap.containsKey(person.getId()))
+        if (_personMap.containsKey(person.getId() - 100000))
             throw BadEntryException;
         
         _nextPersonID++;
@@ -65,6 +65,10 @@ public class School implements java.io.Serializable {
 
     protected HashMap<Integer, Person> getAllUsers(){
         return _personList;
+    }
+
+    protected int getNumberOfPersons(){
+        return _nextPersonID;
     }
 
 }
