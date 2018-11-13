@@ -2,8 +2,6 @@ package sth.core;
 
 import sth.core.exception.BadEntryException;
 import sth.core.exception.NoSuchPersonIdException;
-import sth.core.Person;
-import sth.core.Course;
 
 import java.io.IOException;
 import java.util.List;

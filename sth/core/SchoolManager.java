@@ -4,8 +4,8 @@ import sth.core.exception.BadEntryException;
 import sth.core.exception.ImportFileException;
 import sth.core.exception.NoSuchPersonIdException;
 
-import java.io.EIOxception;
-import java.io.FileNotFoundOxception;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 
 //FIXME import other classes if needed
@@ -16,6 +16,7 @@ import java.io.FileNotFoundOxception;
 public class SchoolManager {
 
   //FIXME add object attributes if needed
+  private School _school = new School("Instituto Superior Tecnico");
 
   //FIXME implement constructors if needed
   
@@ -38,6 +39,7 @@ public class SchoolManager {
    * @param id identifier of the user to login
    * @throws NoSuchPersonIdException if there is no uers with the given identifier
    */
+
   public void login(int id) throws NoSuchPersonIdException {
     //FIXME implement method
   }
