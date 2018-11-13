@@ -8,7 +8,7 @@ import sth.core.SchoolManager;
 import sth.core.Person;
 import sth.app.main.MainMenu;
 import sth.app.person.DoLogin;
-import sth.core.exceptions.BadEntryException;
+import sth.core.exceptions.ImportFileException;
 
 import java.io.IOException;
 
@@ -24,7 +24,7 @@ public class App {
     if (datafile != null) {
       try {
         school.importFile(datafile);
-      } catch (BadEntryException | IOException bde) {
+      } catch (ImportFileException bde) {
         // file input should always be correct: just present the problem
         // no behavior described: just present the problem
         System.err.println("Error in parsing: " + bde.getMessage());
