@@ -19,7 +19,7 @@ public class School implements java.io.Serializable {
     private String _name;
     private static int _nextPersonID;
 
-    /*DEvo implementar com array list ou com dictionary*/
+    /*DEvo implementar com arrblalalallalalallalallalalalalay list ou com dictionary*/
     private ArrayList<Course> _courseList = new ArrayList<>();
     private HashMap<Integer, Person> _personMap = new HashMap<>();
 
