@@ -1,12 +1,12 @@
 package sth.core;
 
-public class Teacher extends Person{
+public class Teacher extends Person implements java.io.Serializable{
 
-	private List<Discpline> _disciplineListTeacher; //List ou ArrayList ?
+	private Set<Discpline> _disciplineListTeacher; //List ou ArrayList ?
 
 	public Teacher(int numberOfPersons, String name, int phone){
 		super(numberOfPersons, name, phone);
-		_disciplineListTeacher = new ArrayList<>();
+		_disciplineListTeacher = new HasSet<>();
 	}
 
 	protected createProject(String name, String description){
@@ -18,17 +18,16 @@ public class Teacher extends Person{
 
 	
 	protected void addDiscipline(Discipline d){
-		//O UML do stor diz que e precisor de ter metodo addDiscipline mas no course.java ja tem o mesmo metodo??
+		//O UML do stor diz que e precisor de ter metodo addDiscipline mas no course.java e student ja tem o mesmo metodo??
 	}
 
 	@Override
 	public String toString(){
-		return 'DOCENTE' + _id + '|' + _phoneNumber + '|' + _name
+		return 'DOCENTE' + _id + '|' + _phoneNumber + '|' + _name;
 	}
 
 	protected String getProjectSubmissions(String nameDiscpline, Project proj) throws NoSuchDisciplineException
 	{
-		List<Discipline> list = new ArrayList<>();
 
 		for(Discipline d : list){
 			if(d.getName().equals(nameDiscpline))	//Procura se existe uma disciplina (por nome) do projeto na lista das 

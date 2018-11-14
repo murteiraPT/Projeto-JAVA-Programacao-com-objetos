@@ -1,6 +1,6 @@
 package sth.core;
 
-public class abstract Person{
+public class abstract Person implements java.io.Serializable{
 
 	private int _id;
 	private String _name;
@@ -24,7 +24,7 @@ public class abstract Person{
 
 	@Override
 	public String toString(){
-		return toString(_id) + '|' + toString(_phoneNumber) + '|' + _name
+		return _id + '|' + _phoneNumber + '|' + _name
 	}
 
 	public void setPhone(int phone){
