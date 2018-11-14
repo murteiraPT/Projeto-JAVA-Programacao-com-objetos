@@ -1,0 +1,13 @@
+/ClosingSurveyException.class
+/DuplicateProjectException.class
+/DuplicateSurveyException.class
+/FinishingSurveyException.class
+/Message.class
+/NoSuchDisciplineException.class
+/NoSuchPersonException.class
+/NoSuchProjectException.class
+/NoSurveyException.class
+/NonEmptySurveyException.class
+/OpeningSurveyException.class
+/ProjectException.class
+/SurveyFinishedException.class

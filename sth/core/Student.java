@@ -1,5 +1,7 @@
 package sth.core;
 
+import java.util.*;
+
 public class Student extends Person implements java.io.Serializable{
 
 	private boolean _isRepresentative;
@@ -10,14 +12,14 @@ public class Student extends Person implements java.io.Serializable{
 	public Student(int numberOfPersons, String name, int phone, boolean isRepresentative){
 		super(numberOfPersons,name,phone);
 		_isRepresentative = isRepresentative;
-		_listDisciplinas = new HasSet<>();
+		_listDisciplinas = new HashSet<>();
 	}
 
 	protected Course getCourse(){
 		return _course;
 	}
 
-	protected addDiscipline(Discipline d){
+	protected void addDiscipline (Discipline d){
 			_listDisciplinas.add(d);
 	}
 
@@ -31,8 +33,9 @@ public class Student extends Person implements java.io.Serializable{
 		return _isRepresentative;
 	}
 
+	
 	public String toString(){
-		return 'ALUNO' + _id + '|' + _phoneNumber + '|' + _name;
+		return "ALUNO" + _id + "|" + _phoneNumber + "|" + _name;
 		//Falta imprimir a lista da disciplina..
 	}
 
