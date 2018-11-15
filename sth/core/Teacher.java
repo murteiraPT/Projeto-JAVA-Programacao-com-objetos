@@ -5,35 +5,37 @@ import sth.core.exception.*;
 
 public class Teacher extends Person{
 
-	private Set<Discipline> _disciplineListTeacher;
+	private Set<Discipline> _disciplineSet;
 
 	public Teacher(int numberOfPersons, String name, int phone){
 		super(numberOfPersons, name, phone);
-		_disciplineListTeacher = new HashSet<>();
+		_disciplineSet = new HashSet<>();
 	}
 	
 	void addDiscipline(Discipline d){
-		_disciplineListTeacher.add(d);
+		_disciplineSet.add(d);
 	}
 	
-	void createProject(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException{
-
-		for(Discipline d : _disciplineListTeacher) {
-			if(d.getName().equals(nameDiscipline)){			
-				Project p = new Project(nameProject);
+	void createProject(String discipline, String description ) throws NoSuchDisciplineIdException{
+		
+		if(!_disciplineSet.contains(discipline))
+			throw new NoSuchDisciplineIdException("A disciplina não é leccionada");
+		else
+		{
+			for(Discipline d : _disciplineSet)
+			{
+				if(d.getName().equals(discipline))
+					d.createProject(discipline, description);
 			}
 		}
-		
-		throw new NoSuchDisciplineIdException("A disciplina não é leccionada");
 	}
-
-
+	
 	@Override
 	public String toString(){
 		
 		String text = "DOCENTE" + '|' + getId() + '|' + getPhone() + '|' + getName() + "\n";
 		
-		for(Discipline d : _disciplineListTeacher)
+		for(Discipline d : _disciplineSet)
 		{
 			text += "* " + d.getCourse().getName() + " - " + d.getName(); 
 		}
@@ -47,7 +49,7 @@ public class Teacher extends Person{
 		
 		List<Student> listS;
 
-		for(Discipline d : _disciplineListTeacher){
+		for(Discipline d : _disciplineSet){
 			if(d.getName().equals(nameDiscpline))
 			{										
 				listS = d.getStudentList();
