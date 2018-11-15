@@ -35,8 +35,12 @@ public class Student extends Person{
 	
 	@Override
 	public String toString(){
+		String text;
 		
-		String text = "ALUNO" + '|' + getId() + '|' + getPhone() + '|' + getName() + "\n";
+		if(_isRepresentative)
+			text = "DELEGADO" + '|' + getId() + '|' + getPhone() + '|' + getName() + "\n";
+		else
+			text = "ALUNO" + '|' + getId() + '|' + getPhone() + '|' + getName() + "\n";
 		
 		for(Discipline d : _listDisciplinas)
 		{

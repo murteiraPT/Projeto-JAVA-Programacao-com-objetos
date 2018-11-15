@@ -24,7 +24,7 @@ public class DoShowPerson extends Command<SchoolManager> {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() {
-	  _receiver.ShowUser();
+	  _receiver.showUser();
   }
 
 }

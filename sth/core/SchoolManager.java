@@ -89,14 +89,14 @@ public class SchoolManager {
 	  return _school.getAllUsers();
   }
   
-  public void ShowAllUsers() {
+  public void showAllUsers() {
 	  HashMap<Integer, Person> personMap = getAllUsers();
 	  for (HashMap.Entry<Integer, Person> entry : personMap.entrySet()) {
-		  System.out.println(entry.toString());
+		  System.out.println(entry.getValue().toString());
 	  }
   }
   
-  public void ShowUser(int id) {
+  public void showUser(int id) {
 	  System.out.println(_school.getPerson(id).toString());
   }
   
@@ -104,7 +104,19 @@ public class SchoolManager {
 	  _school.getPerson(id).setPhone(phone);
   }
   
-  public void NewDiscipline(String name, int cap, Course course) {
+  public void searchPerson(String name) {
+	  
+	  HashMap<Integer, Person> personMap = getAllUsers();
+	  
+	  for (HashMap.Entry<Integer, Person> entry : personMap.entrySet()) {
+		  if(entry.getValue().getName().equals(name))
+			  System.out.println(entry.getValue().toString());
+	  }
+  }
+  
+  
+  
+  public void newDiscipline(String name, int cap, Course course) {
 	  Discipline d = new Discipline(name, cap, course);
 	  course.addDiscipline(d);
 	  	  

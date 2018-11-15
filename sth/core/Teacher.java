@@ -19,13 +19,12 @@ public class Teacher extends Person{
 	void createProject(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException{
 
 		for(Discipline d : _disciplineListTeacher) {
-			if(d.getName().equals(nameDiscipline)){
-				Project p = new Project(nameProject,??Descrição??);
-				//....
+			if(d.getName().equals(nameDiscipline)){			
+				Project p = new Project(nameProject);
 			}
 		}
 		
-		throw new NoSuchDisciplineIdException("Não existe a disciplina leccionada");
+		throw new NoSuchDisciplineIdException("A disciplina não é leccionada");
 	}
 
 

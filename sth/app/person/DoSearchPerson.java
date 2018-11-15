@@ -24,7 +24,7 @@ public class DoSearchPerson extends Command<SchoolManager> {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() {
-    _receiver.doSearchPer(_name);
+    _receiver.searchPerson(_name);
   }
 
 }

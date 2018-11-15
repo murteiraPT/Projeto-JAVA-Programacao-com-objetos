@@ -21,12 +21,6 @@ public class Person {
 		return _id;
 	}
 
-
-	@Override
-	public String toString(){
-		return getPersonType() + '|' + _id + '|' + getPhone() + '|' + getName();
-	}
-
 	public void setPhone(int phone){
 		_phoneNumber=phone;
 	}
