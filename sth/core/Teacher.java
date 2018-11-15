@@ -9,26 +9,31 @@ public class Teacher extends Person{
 
 	public Teacher(int id, int phone, String name){
 		super(id, phone, name);
-		_disciplineListTeacher = new HashSet<>();
+		_disciplineSet = new HashSet<>();
 
 	}
+	@Override
+	void parseContext(String lineContext, School school) throws BadEntryException {
+		String components[] =  lineContext.split("\\|");
+
+	    if (components.length != 2)
+	      throw new BadEntryException("Invalid line context " + lineContext);
+
+	    Course course = school.parseCourse(components[0]);
+	    Discipline discipline = course.parseDiscipline(components[1]);
+
+	    discipline.addTeacher(this);
+	 }
 	
 	void addDiscipline(Discipline d){
 		_disciplineSet.add(d);
 	}
 	
-	void createProject(String discipline, String description ) throws NoSuchDisciplineIdException{
+	void createProject(Discipline discipline, String name, String description ) throws NoSuchDisciplineIdException{
 		
 		if(!_disciplineSet.contains(discipline))
 			throw new NoSuchDisciplineIdException("discipline isnt exists");
-		else
-		{
-			for(Discipline d : _disciplineSet)
-			{
-				if(d.getName().equals(discipline))
-					d.createProject(discipline, description);
-			}
-		}
+		discipline.createProject(name, description);
 	}
 	
 	@Override
@@ -36,31 +41,17 @@ public class Teacher extends Person{
 		
 		String text = "DOCENTE" + '|' + getId() + '|' + getPhone() + '|' + getName() + "\n";
 		
-		for(Discipline d : _disciplineSet)
-		{
-			text += "* " + d.getCourse().getName() + " - " + d.getName(); 
+		for(Discipline d : _disciplineSet){
+			text += "* " + d.getCourse().getName() + " - " + d.getName() + "\n"; 
 		}
 		
 		return text;
 	}
 
-	String getStudentsOfDiscipline(String nameDiscpline) throws NoSuchDisciplineIdException
-	{
-		String text;
-		
-		List<Student> listS;
-
-		for(Discipline d : _disciplineSet){
-			if(d.getName().equals(nameDiscpline))
-			{										
-				listS = d.getStudentList();
-				for(Student s : listS)
-				{
-					text += s.toString();
-				}
-			}
-		}
-		throw new NoSuchDisciplineIdException("discipline isnt exists");
+	ArrayList<Student> getStudentsOfDiscipline(Discipline discipline) throws NoSuchDisciplineIdException{
+		if(!_disciplineSet.contains(discipline))	
+			throw new NoSuchDisciplineIdException("Discipline does not exists");
+		return discipline.getStudentList();
 	}
 	
 }

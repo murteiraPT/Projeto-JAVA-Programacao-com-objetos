@@ -26,6 +26,15 @@ public class Discipline {
 		_teacherList = new ArrayList<>();
 	}
 	
+	public Discipline(String name, Course course) {
+		_name = name;
+		_capacity = 300;
+		_course = course;
+		_projectSet = new HashSet<>();
+		_studentList = new ArrayList<>();
+		_teacherList = new ArrayList<>();
+	}
+	
 	public String getName() {
 		return _name;
 	}
@@ -40,6 +49,7 @@ public class Discipline {
 	
 	void addTeacher(Teacher t) {
 		_teacherList.add(t);
+		t.addDiscipline(this);
 	}
 	
 	void enrollStudent(Student s) {

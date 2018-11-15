@@ -21,6 +21,10 @@ public class Course {
 	public String getName(){
 		return _name;
 	}
+	
+	ArrayList<Discipline> getDisciplineList(){
+		return _disciplineList;
+	}
 
 	void addDiscipline(Discipline discipline) throws BadEntryException{
 		if(_disciplineList.contains(discipline))
@@ -40,8 +44,15 @@ public class Course {
 		if(!_studentList.contains(student))
 			throw new BadEntryException("Student out of course");
 		student.setRepresentative(true);
-		
 	}
-	
-	
+
+	Discipline parseDiscipline(String name) {
+    	for ( Discipline d : _disciplineList){
+    		if(d.getName().equals(name))
+    			return d;
+    	}
+    	Discipline discipline = new Discipline(name, this);
+    	_disciplineList.add(discipline);
+    	return discipline;
+    }	
 }

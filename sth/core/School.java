@@ -64,5 +64,17 @@ public class School implements java.io.Serializable {
     protected int getNumberOfPersons(){
         return _nextPersonID;
     }
-
+    
+    ArrayList<Course> getCourseList(){
+    	return _courseList;
+    }
+    Course parseCourse(String name) {
+    	for ( Course c : _courseList){
+    		if(c.getName().equals(name))
+    			return c;
+    	}
+    	Course course = new Course(name);
+    	_courseList.add(course);
+    	return course;
+    }
 }

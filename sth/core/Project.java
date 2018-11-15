@@ -24,5 +24,9 @@ public class Project{
 	Boolean getStatus() {
 		return _isOpen;
 	}
+	
+	void setDescription(String description) {
+		_description = description;
+	}
 }
 

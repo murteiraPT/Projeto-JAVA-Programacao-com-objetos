@@ -1,5 +1,7 @@
 package sth.core;
 
+import sth.core.exception.BadEntryException;
+
 public class Person {
 
 	private int _id;
@@ -27,6 +29,9 @@ public class Person {
 		return _name;
 	}
 	
+	void parseContext(String context, School school) throws BadEntryException {
+	    throw new BadEntryException("Should not have extra context: " + context);
+	  }
 	/*
 	@Override
 	public String toString(){

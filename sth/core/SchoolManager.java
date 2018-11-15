@@ -4,6 +4,7 @@ import sth.core.exception.BadEntryException;
 import sth.core.exception.ImportFileException;
 import sth.core.exception.NoSuchPersonIdException;
 
+import java.util.*;
 import java.io.IOException;
 import java.util.HashMap;
 import java.io.FileNotFoundException;
@@ -122,13 +123,17 @@ public class SchoolManager {
   }
   
   public void doCreateProject(String nameDiscipline, String nameProject) {
-	  
-  }
-  
-  public void newDiscipline(String name, int cap, Course course) {
-	  Discipline d = new Discipline(name, cap, course);
-	  course.addDiscipline(d);
-	  	  
+	  ArrayList<Course> courseList = _school.getCourseList();
+	  ArrayList<Discipline> disciplineList;
+	  for (Course c : courseList) {
+		  disciplineList = c.getDisciplineList();
+		  for (Discipline d : disciplineList) {
+			  if (d.getName().equals(nameDiscipline)) {
+				  	d.createProject(nameProject, "");
+			  		break;
+			  }
+		  }
+	  }
   }
 
 }
