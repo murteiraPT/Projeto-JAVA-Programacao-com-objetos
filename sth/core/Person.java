@@ -6,8 +6,7 @@ public class Person {
 	private String _name;
 	private int _phoneNumber;
 
-	public Person(int nextPersonID, String name, int phone)
-	{
+	public Person(int nextPersonID, int phone, String name){
 		_id = nextPersonID;
 		_name = name;
 		_phoneNumber = phone;
@@ -17,23 +16,23 @@ public class Person {
 		return _name;
 	}
 
-	public int getId(){
+	int getId(){
 		return _id;
 	}
 
-
+	int getPhone(){
+		return _phoneNumber;
+	}
+	
+	String getName() {
+		return _name;
+	}
+	
+	/*
 	@Override
 	public String toString(){
 		return getPersonType() + '|' + _id + '|' + getPhone() + '|' + getName();
-	}
-
-	public void setPhone(int phone){
-		_phoneNumber=phone;
-	}
-
-	public int getPhone(){
-		return _phoneNumber;
-	}
+	}*/
 
 }
 

@@ -6,14 +6,14 @@ import sth.core.exception.*;
 public class Student extends Person{
 
 	private boolean _isRepresentative;
-	private Set<Discipline> _listDisciplinas;  
+	private Set<Discipline> _disciplineSet;  
 	private Course _course;
 
 
-	public Student(int numberOfPersons, String name, int phone, boolean isRepresentative){
-		super(numberOfPersons,name,phone);
+	public Student(int id, int phone, String name, boolean isRepresentative){
+		super(id, phone, name);
 		_isRepresentative = isRepresentative;
-		_listDisciplinas = new HashSet<>();
+		_disciplineSet = new HashSet<>();
 	}
 
 	Course getCourse(){
@@ -21,7 +21,7 @@ public class Student extends Person{
 	}
 
 	void addDiscipline (Discipline d){
-			_listDisciplinas.add(d);
+		_disciplineSet.add(d);
 	}
 
 	void setRepresentative(boolean representative){
@@ -38,7 +38,7 @@ public class Student extends Person{
 		
 		String text = "ALUNO" + '|' + getId() + '|' + getPhone() + '|' + getName() + "\n";
 		
-		for(Discipline d : _listDisciplinas)
+		for(Discipline d : _disciplineSet)
 		{
 			text += "* "  + _course.getName() +  " - " + d.getName() + "\n"; 
 		}

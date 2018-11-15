@@ -7,8 +7,8 @@ public class Teacher extends Person{
 
 	private Set<Discipline> _disciplineListTeacher;
 
-	public Teacher(int numberOfPersons, String name, int phone){
-		super(numberOfPersons, name, phone);
+	public Teacher(int id, int phone, String name){
+		super(id, phone, name);
 		_disciplineListTeacher = new HashSet<>();
 	}
 	

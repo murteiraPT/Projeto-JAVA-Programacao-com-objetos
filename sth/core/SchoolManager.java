@@ -104,12 +104,6 @@ public class SchoolManager {
 	  _school.getPerson(id).setPhone(phone);
   }
   
-  public void NewDiscipline(String name, int cap, Course course) {
-	  Discipline d = new Discipline(name, cap, course);
-	  course.addDiscipline(d);
-	  	  
-  }
-  
   
 
 }
