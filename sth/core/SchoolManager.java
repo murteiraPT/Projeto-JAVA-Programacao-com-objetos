@@ -10,15 +10,15 @@ import java.io.FileNotFoundException;
 
 //FIXME import other classes if needed
 
-/**
- * The façade class.
- */
 public class SchoolManager {
 
   //FIXME add object attributes if needed
-  private School _school = new School("Instituto Superior Tecnico");
+  private School _school;
+  private Person _loggedInUser;
 
-  //FIXME implement constructors if needed
+  public SchoolManager(School school) {
+	  _school = school;
+  }
   
   /**
    * @param datafile
@@ -32,6 +32,7 @@ public class SchoolManager {
       throw new ImportFileException(e);
     }
   }
+  
 
   /**
    * Do the login of the user with the given identifier.

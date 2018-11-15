@@ -6,11 +6,11 @@ public class Person {
 	private String _name;
 	private int _phoneNumber;
 
-	public Person(int numberOfPersons, String name, int phone)
+	public Person(int nextPersonID, String name, int phone)
 	{
-		_id=100000 + numberOfPersons;
-		_name=name;
-		_phoneNumber=phone;
+		_id = nextPersonID;
+		_name = name;
+		_phoneNumber = phone;
 	}
 
 	public String getName(){

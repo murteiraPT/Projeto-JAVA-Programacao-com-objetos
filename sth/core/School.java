@@ -26,13 +26,13 @@ public class School implements java.io.Serializable {
     */
 
     void importFile(String filename) throws IOException, BadEntryException {
-        //FIXME implement text file reader
+    	
     }
 
 
     public School(String name){
         _name = name;
-        _nextPersonID = 0;
+        _nextPersonID = 100000;
     }
 
     Person getPerson (int id){
@@ -41,7 +41,7 @@ public class School implements java.io.Serializable {
 
     protected void addPerson(Person person) throws BadEntryException{
         try {
-        	if (_personMap.containsKey(person.getId() - 100000))
+        	if (_personMap.containsKey(person.getId()))
         		throw new BadEntryException("Person already exists");
             
             _nextPersonID++;
