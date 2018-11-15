@@ -6,8 +6,8 @@ import sth.core.exception.*;
 public class Student extends Person{
 
 	private boolean _isRepresentative;
-	private Set<Discipline> _listDisciplinas;  //Set e melhor que List para nao ter duplicados
-	private Course _course;	 // Achei que faz sentido pois o aluno tem um curso.. 
+	private Set<Discipline> _listDisciplinas;  
+	private Course _course;
 
 
 	public Student(int numberOfPersons, String name, int phone, boolean isRepresentative){
@@ -33,11 +33,23 @@ public class Student extends Person{
 	protected boolean isRepresentative(){
 		return _isRepresentative;
 	}
-
 	
+	
+	public String getPersonType() {
+		return "ALUNO";
+	}
+	
+	@Override
 	public String toString(){
-		return "ALUNO" + super.getId() + "|" + super.getPhone() + "|" + super.getName();
-		//Falta imprimir a lista da disciplina..
+		
+		String text = super.toString() + "\n";
+		
+		for(Discipline d : _disciplineListTeacher)
+		{
+			text += _course.getName() +  " - " + d.getName(); 
+		}
+		
+		return text;
 	}
 
 	protected void submitAnswerToSurvey(String nameDiscipline, Project proj) throws NoSuchDisciplineIdException

@@ -11,54 +11,53 @@ public class Teacher extends Person{
 		super(numberOfPersons, name, phone);
 		_disciplineListTeacher = new HashSet<>();
 	}
-
-	protected void createProject(String name, String description){
-
-		//Como e que verifico se o nome do projeto e unico no contexto da disciplina
-		Project p = new Project(name,description);
-		
-	}
-
 	
 	protected void addDiscipline(Discipline d){
 		_disciplineListTeacher.add(d);
 	}
+	
+	protected void createProject(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException{
+
+		for(Discipline d : _disciplineListTeacher) {
+			if(d.getName().equals(nameDiscipline)){
+				Project p = new Project(nameProject,??Descrição??);
+				//....
+			}
+		}
+		
+		throw new NoSuchDisciplineIdException("Não existe a disciplina leccionada");
+	}
+	
+	public String getPersonType() {
+		return "DOCENTE";
+	}
+
 
 	@Override
 	public String toString(){
-		return "DOCENTE" + super.getId() + '|' + super.getPhone() + '|' + super.getName();
-	}
-	
-	protected String getProjectSubmissions(String nameDiscpline, Project proj) throws NoSuchDisciplineIdException
-	{
-
-		for(Discipline d : _disciplineListTeacher){
-			if(d.getName().equals(nameDiscpline))	//Procura se existe uma disciplina (por nome) do projeto na lista das 
-			{										// discplinas leccionadas por Docente
-				return proj.getSubmissions();
-			}
+		
+		String text = super.toString() + "\n";
+		
+		for(Discipline d : _disciplineListTeacher)
+		{
+			text += /*Como e que obtenho o curso?? + */" - " + d.getName(); 
 		}
-
-		throw new NoSuchDisciplineIdException("Não existe a disciplina");
+		
+		return text;
 	}
 
 	protected String getStudentsOfDiscipline(String nameDiscpline) throws NoSuchDisciplineIdException
 	{
-		List<Discipline> listD = new ArrayList<>();
 
 		List<Student> listS = new ArrayList<>();
 
-		for(Discipline d : listD){
-			if(d.getName().equals(nameDiscpline))	//Procura se existe uma disciplina (por nome) do projeto na lista das 
-			{										// discplinas leccionadas por Docente
-				//falta a obter a lista de alunos
+		for(Discipline d : _disciplineListTeacher){
+			if(d.getName().equals(nameDiscpline))
+			{										
+				//Como e que obtenho a lista de estudantes..
 			}
 		}
-
-		throw new NoSuchDisciplineIdException("Não existe a disciplina");
+		throw new NoSuchDisciplineIdException("Não existe a disciplina leccionada");
 	}
-
-
-	//Nao ha mais metodos no UML do stor
-	//mas vi no enunciado 4.4 que se diz que ainda falta fecharProjeto(), verResultadosDeUmProjeto().....
+	
 }
