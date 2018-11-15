@@ -19,7 +19,7 @@ public class Teacher extends Person{
 	void createProject(String discipline, String description ) throws NoSuchDisciplineIdException{
 		
 		if(!_disciplineSet.contains(discipline))
-			throw new NoSuchDisciplineIdException("A disciplina não é leccionada");
+			throw new NoSuchDisciplineIdException("discipline isnt exists");
 		else
 		{
 			for(Discipline d : _disciplineSet)
@@ -59,7 +59,7 @@ public class Teacher extends Person{
 				}
 			}
 		}
-		throw new NoSuchDisciplineIdException("Não existe a disciplina leccionada");
+		throw new NoSuchDisciplineIdException("discipline isnt exists");
 	}
 	
 }
