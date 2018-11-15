@@ -92,12 +92,12 @@ public class SchoolManager {
   public void ShowAllUsers() {
 	  HashMap<Integer, Person> personMap = getAllUsers();
 	  for (HashMap.Entry<Integer, Person> entry : personMap.entrySet()) {
-		  entry.toString();
+		  System.out.println(entry.toString());
 	  }
   }
   
   public void ShowUser(int id) {
-	  _school.getPerson(id).toString();
+	  System.out.println(_school.getPerson(id).toString());
   }
   
   public void setPhoneNr(int id, int phone) {
