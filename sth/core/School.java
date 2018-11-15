@@ -1,7 +1,6 @@
 package sth.core;
 
 import sth.core.exception.BadEntryException;
-import sth.core.exception.NoSuchPersonIdException;
 
 import java.io.IOException;
 import java.util.*;
@@ -17,7 +16,6 @@ public class School implements java.io.Serializable {
     private String _name;
     private static int _nextPersonID;
 
-    /*DEvo implementar com arrblalalallalalallalallalalalalay list ou com dictionary*/
     private ArrayList<Course> _courseList = new ArrayList<>();
     private HashMap<Integer, Person> _personMap = new HashMap<>();
 
@@ -37,32 +35,30 @@ public class School implements java.io.Serializable {
         _nextPersonID = 0;
     }
 
-    /*é possivel remover pessoas????*/
-    protected Person getPerson(int id) throws NoSuchPersonIdException{
-        try { 
-            return _personList[id]; 
-        } catch (NullPointerException) {
-            throw NoSuchPersonIdException;
-        }  
+    Person getPerson (int id){
+        return _personMap.get(id);
     }
 
     protected void addPerson(Person person) throws BadEntryException{
-        if (_personMap.containsKey(person.getId() - 100000))
-            throw BadEntryException;
-        
-        _nextPersonID++;
-        _personMap.put(_nexPerson, person);
+        try {
+        	if (_personMap.containsKey(person.getId() - 100000))
+        		throw new BadEntryException("Person already exists");
+            
+            _nextPersonID++;
+            _personMap.put(_nextPersonID, person);
+        }finally{}
     }
 
     protected void addCourse(Course course) throws BadEntryException{
-        if (_courseList.contains(course))
-            throw BadEntryException;
-        
-        _courseList.add(course);
+        try {
+        	if (_courseList.contains(course))
+                throw new BadEntryException("Course already exists");
+            _courseList.add(course);
+        }finally {}
     }
 
     protected HashMap<Integer, Person> getAllUsers(){
-        return _personList;
+        return _personMap;
     }
 
     protected int getNumberOfPersons(){
