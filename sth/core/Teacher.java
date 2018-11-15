@@ -1,15 +1,18 @@
 package sth.core;
 
-public class Teacher extends Person implements java.io.Serializable{
+import java.util.*;
+import sth.core.exception.*;
 
-	private Set<Discpline> _disciplineListTeacher; //List ou ArrayList ?
+public class Teacher extends Person{
+
+	private Set<Discipline> _disciplineListTeacher; //List ou ArrayList ?
 
 	public Teacher(int numberOfPersons, String name, int phone){
 		super(numberOfPersons, name, phone);
-		_disciplineListTeacher = new HasSet<>();
+		_disciplineListTeacher = new HashSet<>();
 	}
 
-	protected createProject(String name, String description){
+	protected void createProject(String name, String description){
 
 		//Como e que verifico se o nome do projeto e unico no contexto da disciplina
 		Project p = new Project(name,description);
@@ -18,28 +21,28 @@ public class Teacher extends Person implements java.io.Serializable{
 
 	
 	protected void addDiscipline(Discipline d){
-		//O UML do stor diz que e precisor de ter metodo addDiscipline mas no course.java e student ja tem o mesmo metodo??
+		_disciplineListTeacher.add(d);
 	}
 
 	@Override
 	public String toString(){
-		return 'DOCENTE' + _id + '|' + _phoneNumber + '|' + _name;
+		return "DOCENTE" + super.getId() + '|' + super.getPhone() + '|' + super.getName();
 	}
-
-	protected String getProjectSubmissions(String nameDiscpline, Project proj) throws NoSuchDisciplineException
+	
+	protected String getProjectSubmissions(String nameDiscpline, Project proj) throws NoSuchDisciplineIdException
 	{
 
-		for(Discipline d : list){
+		for(Discipline d : _disciplineListTeacher){
 			if(d.getName().equals(nameDiscpline))	//Procura se existe uma disciplina (por nome) do projeto na lista das 
 			{										// discplinas leccionadas por Docente
 				return proj.getSubmissions();
 			}
 		}
 
-		throw NoSuchDisciplineException;
+		throw new NoSuchDisciplineIdException("Não existe a disciplina");
 	}
 
-	protected String getStudentsOfDiscipline(String nameDiscpline) throws NoSuchDisciplineException
+	protected String getStudentsOfDiscipline(String nameDiscpline) throws NoSuchDisciplineIdException
 	{
 		List<Discipline> listD = new ArrayList<>();
 
@@ -52,7 +55,7 @@ public class Teacher extends Person implements java.io.Serializable{
 			}
 		}
 
-		throw NoSuchDisciplineException;
+		throw new NoSuchDisciplineIdException("Não existe a disciplina");
 	}
 
 
