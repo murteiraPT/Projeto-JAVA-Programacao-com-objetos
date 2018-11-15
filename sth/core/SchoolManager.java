@@ -96,6 +96,19 @@ public class SchoolManager {
 	  }
   }
   
+  public void ShowUser(int id) {
+	  _school.getPerson(id).toString();
+  }
+  
+  public void setPhoneNr(int id, int phone) {
+	  _school.getPerson(id).setPhone(phone);
+  }
+  
+  public void NewDiscipline(String name, int cap, Course course) {
+	  Discipline d = new Discipline(name, cap, course);
+	  course.addDiscipline(d);
+	  	  
+  }
   
   
 
