@@ -6,8 +6,12 @@ public class Employee extends Person implements java.io.Serializable{
 		super(numberOfPersons,name,phone);
 	}
 	
-	public String getPersonType() {
-		return "FUNCIONÁRIO";
+	@Override
+	public String toString(){
+		
+		String text = "FUNCIONÁRIO" + '|' + getId() + '|' + getPhone() + '|' + getName() + "\n";
+
+		return text;
 	}
 	
 }

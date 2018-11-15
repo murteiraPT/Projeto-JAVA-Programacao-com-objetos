@@ -22,7 +22,7 @@ public class Course {
 		return _name;
 	}
 
-	void addDiscpline(Discipline discipline) throws BadEntryException{
+	void addDiscipline(Discipline discipline) throws BadEntryException{
 		if(_disciplineList.contains(discipline))
 			throw new BadEntryException("Discipline already exists");
 		_disciplineList.add(discipline);

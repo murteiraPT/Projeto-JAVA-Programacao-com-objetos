@@ -33,18 +33,14 @@ public class Student extends Person{
 	}
 	
 	
-	public String getPersonType() {
-		return "ALUNO";
-	}
-	
 	@Override
 	public String toString(){
 		
-		String text = super.toString() + "\n";
+		String text = "ALUNO" + '|' + getId() + '|' + getPhone() + '|' + getName() + "\n";
 		
 		for(Discipline d : _listDisciplinas)
 		{
-			text += _course.getName() +  " - " + d.getName() + "\n"; 
+			text += "* "  + _course.getName() +  " - " + d.getName() + "\n"; 
 		}
 		
 		return text;

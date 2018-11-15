@@ -27,20 +27,16 @@ public class Teacher extends Person{
 		
 		throw new NoSuchDisciplineIdException("Não existe a disciplina leccionada");
 	}
-	
-	public String getPersonType() {
-		return "DOCENTE";
-	}
 
 
 	@Override
 	public String toString(){
 		
-		String text = super.toString() + "\n";
+		String text = "DOCENTE" + '|' + getId() + '|' + getPhone() + '|' + getName() + "\n";
 		
 		for(Discipline d : _disciplineListTeacher)
 		{
-			text += /*Como e que obtenho o curso?? + */" - " + d.getName(); 
+			text += "* " + d.getCourse().getName() + " - " + d.getName(); 
 		}
 		
 		return text;
