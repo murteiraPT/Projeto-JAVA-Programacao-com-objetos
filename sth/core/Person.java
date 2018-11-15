@@ -22,10 +22,10 @@ public class Person {
 	}
 
 
-	@Override
+	/*@Override
 	public String toString(){
 		return _id + '|' + _phoneNumber + '|' + _name;
-	}
+	} Nao e necessario..*/
 
 	public void setPhone(int phone){
 		_phoneNumber=phone;

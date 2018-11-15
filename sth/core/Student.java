@@ -1,8 +1,9 @@
 package sth.core;
 
 import java.util.*;
+import sth.core.exception.*;
 
-public class Student extends Person implements java.io.Serializable{
+public class Student extends Person{
 
 	private boolean _isRepresentative;
 	private Set<Discipline> _listDisciplinas;  //Set e melhor que List para nao ter duplicados
@@ -35,11 +36,11 @@ public class Student extends Person implements java.io.Serializable{
 
 	
 	public String toString(){
-		return "ALUNO" + _id + "|" + _phoneNumber + "|" + _name;
+		return "ALUNO" + super.getId() + "|" + super.getPhone() + "|" + super.getName();
 		//Falta imprimir a lista da disciplina..
 	}
 
-	protected void submitAnswerToSurvey(String nameDiscipline, Project proj) throws NoSuchDisciplineException
+	protected void submitAnswerToSurvey(String nameDiscipline, Project proj) throws NoSuchDisciplineIdException
 	{
 		private int numberHours = proj.requestProjectHours();
 		private String comment = proj.requestComment();
@@ -52,11 +53,8 @@ public class Student extends Person implements java.io.Serializable{
 				//...
 			}
 
-
 		}
-		throw NoSuchDisciplineException;
-
-
+		throw new NoSuchDisciplineIdException("Invalido com o nome da disciplina");
 
 
 	}
@@ -65,7 +63,7 @@ public class Student extends Person implements java.io.Serializable{
 
 		private String text = proj.requestDeliveryMessage();
 
-		proj.addSubmission(????, text);   //addSubmission(Student s, String message)
+		proj.addSubmission(this, text);   //addSubmission(Student s, String message)
 	}
 
 
