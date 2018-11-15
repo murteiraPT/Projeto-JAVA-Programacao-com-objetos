@@ -16,21 +16,19 @@ public class Student extends Person{
 		_listDisciplinas = new HashSet<>();
 	}
 
-	protected Course getCourse(){
+	Course getCourse(){
 		return _course;
 	}
 
-	protected void addDiscipline (Discipline d){
+	void addDiscipline (Discipline d){
 			_listDisciplinas.add(d);
 	}
 
-	protected void setRepresentative(boolean representative){
+	void setRepresentative(boolean representative){
 		_isRepresentative = representative;
-
-		//falta addRepresentative ou removeRepresentative 
 	}
 
-	protected boolean isRepresentative(){
+	boolean isRepresentative(){
 		return _isRepresentative;
 	}
 	
@@ -44,14 +42,15 @@ public class Student extends Person{
 		
 		String text = super.toString() + "\n";
 		
-		for(Discipline d : _disciplineListTeacher)
+		for(Discipline d : _listDisciplinas)
 		{
-			text += _course.getName() +  " - " + d.getName(); 
+			text += _course.getName() +  " - " + d.getName() + "\n"; 
 		}
 		
 		return text;
 	}
-
+	
+	/*
 	protected void submitAnswerToSurvey(String nameDiscipline, Project proj) throws NoSuchDisciplineIdException
 	{
 		private int numberHours = proj.requestProjectHours();
@@ -76,7 +75,7 @@ public class Student extends Person{
 		private String text = proj.requestDeliveryMessage();
 
 		proj.addSubmission(this, text);   //addSubmission(Student s, String message)
-	}
+	}*/
 
 
 

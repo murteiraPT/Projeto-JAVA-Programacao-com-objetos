@@ -5,18 +5,18 @@ import sth.core.exception.*;
 
 public class Teacher extends Person{
 
-	private Set<Discipline> _disciplineListTeacher; //List ou ArrayList ?
+	private Set<Discipline> _disciplineListTeacher;
 
 	public Teacher(int numberOfPersons, String name, int phone){
 		super(numberOfPersons, name, phone);
 		_disciplineListTeacher = new HashSet<>();
 	}
 	
-	protected void addDiscipline(Discipline d){
+	void addDiscipline(Discipline d){
 		_disciplineListTeacher.add(d);
 	}
 	
-	protected void createProject(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException{
+	void createProject(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException{
 
 		for(Discipline d : _disciplineListTeacher) {
 			if(d.getName().equals(nameDiscipline)){
@@ -46,15 +46,20 @@ public class Teacher extends Person{
 		return text;
 	}
 
-	protected String getStudentsOfDiscipline(String nameDiscpline) throws NoSuchDisciplineIdException
+	String getStudentsOfDiscipline(String nameDiscpline) throws NoSuchDisciplineIdException
 	{
-
-		List<Student> listS = new ArrayList<>();
+		String text;
+		
+		List<Student> listS;
 
 		for(Discipline d : _disciplineListTeacher){
 			if(d.getName().equals(nameDiscpline))
 			{										
-				//Como e que obtenho a lista de estudantes..
+				listS = d.getStudentList();
+				for(Student s : listS)
+				{
+					text += s.toString();
+				}
 			}
 		}
 		throw new NoSuchDisciplineIdException("Não existe a disciplina leccionada");

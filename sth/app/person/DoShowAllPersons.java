@@ -3,6 +3,7 @@ package sth.app.person;
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.Display;
 import sth.core.SchoolManager;
+import java.util.*;
 
 //FIXME import other classes if needed
 
@@ -24,7 +25,7 @@ public class DoShowAllPersons extends Command<SchoolManager> {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() {
-    //FIXME implement command
+	  _receiver.ShowAllPersons();
   }
 
 }
