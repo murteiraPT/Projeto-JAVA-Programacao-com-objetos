@@ -5,36 +5,38 @@ import sth.core.exception.*;
 
 public class Teacher extends Person{
 
-	private Set<Discipline> _disciplineListTeacher;
+	private Set<Discipline> _disciplineSet;
 
 	public Teacher(int id, int phone, String name){
 		super(id, phone, name);
 		_disciplineListTeacher = new HashSet<>();
+
 	}
 	
 	void addDiscipline(Discipline d){
-		_disciplineListTeacher.add(d);
+		_disciplineSet.add(d);
 	}
 	
-	void createProject(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException{
-
-		for(Discipline d : _disciplineListTeacher) {
-			if(d.getName().equals(nameDiscipline)){
-				Project p = new Project(nameProject,??Descrição??);
-				//....
+	void createProject(String discipline, String description ) throws NoSuchDisciplineIdException{
+		
+		if(!_disciplineSet.contains(discipline))
+			throw new NoSuchDisciplineIdException("discipline isnt exists");
+		else
+		{
+			for(Discipline d : _disciplineSet)
+			{
+				if(d.getName().equals(discipline))
+					d.createProject(discipline, description);
 			}
 		}
-		
-		throw new NoSuchDisciplineIdException("Não existe a disciplina leccionada");
 	}
-
-
+	
 	@Override
 	public String toString(){
 		
 		String text = "DOCENTE" + '|' + getId() + '|' + getPhone() + '|' + getName() + "\n";
 		
-		for(Discipline d : _disciplineListTeacher)
+		for(Discipline d : _disciplineSet)
 		{
 			text += "* " + d.getCourse().getName() + " - " + d.getName(); 
 		}
@@ -48,7 +50,7 @@ public class Teacher extends Person{
 		
 		List<Student> listS;
 
-		for(Discipline d : _disciplineListTeacher){
+		for(Discipline d : _disciplineSet){
 			if(d.getName().equals(nameDiscpline))
 			{										
 				listS = d.getStudentList();
@@ -58,7 +60,7 @@ public class Teacher extends Person{
 				}
 			}
 		}
-		throw new NoSuchDisciplineIdException("Não existe a disciplina leccionada");
+		throw new NoSuchDisciplineIdException("discipline isnt exists");
 	}
 	
 }
