@@ -5,6 +5,7 @@ import sth.core.exception.ImportFileException;
 import sth.core.exception.NoSuchPersonIdException;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.io.FileNotFoundException;
 
 
@@ -38,47 +39,64 @@ public class SchoolManager {
    * Do the login of the user with the given identifier.
 
    * @param id identifier of the user to login
-   * @throws NoSuchPersonIdException if there is no uers with the given identifier
+   * @throws NoSuchPersonIdException if there is no users with the given identifier
    */
 
   public void login(int id) throws NoSuchPersonIdException {
-    //FIXME implement method
+    if (_school.getPerson(id)==null)
+    	throw new NoSuchPersonIdException(id);
+    _loggedInUser = _school.getPerson(id);
   }
 
   /**
    * @return true when the currently logged in person is an administrative
    */
   public boolean isLoggedUserAdministrative() {
-    //FIXME implement predicate
+	  return _loggedInUser instanceof Employee;
   }
 
   /**
    * @return true when the currently logged in person is a professor
    */
   public boolean isLoggedUserProfessor() {
-    //FIXME implement predicate
+	  return _loggedInUser instanceof Employee;
   }
 
   /**
    * @return true when the currently logged in person is a student
    */
   public boolean isLoggedUserStudent() {
-    //FIXME implement predicate
+	  return _loggedInUser instanceof Student;
   }
 
   /**
    * @return true when the currently logged in person is a representative
    */
   public boolean isLoggedUserRepresentative() {
-    //FIXME implement predicate
+	  if(!isLoggedUserStudent())
+		  return false;
+	  Student s = (Student) _loggedInUser;
+	  return s.isRepresentative();
   }
-
-  //FIXME implement other methods (in general, one for each command in sth-app)
   
   public Person newUser(String name, int phoneNumber){
     int numberOfUsers = _school.getNumberOfPersons();
     Person person = new Person(numberOfUsers, name, phoneNumber);
     return person;
   }
+  
+  public HashMap<Integer, Person> getAllUsers(){
+	  return _school.getAllUsers();
+  }
+  
+  public void ShowAllUsers() {
+	  HashMap<Integer, Person> personMap = getAllUsers();
+	  for (HashMap.Entry<Integer, Person> entry : personMap.entrySet()) {
+		  entry.toString();
+	  }
+  }
+  
+  
+  
 
 }
