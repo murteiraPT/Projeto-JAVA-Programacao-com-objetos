@@ -81,7 +81,7 @@ public class SchoolManager {
   
   public Person newUser(String name, int phoneNumber){
     int numberOfUsers = _school.getNumberOfPersons();
-    Person person = new Person(numberOfUsers, name, phoneNumber);
+    Person person = new Person(numberOfUsers,phoneNumber, name);
     return person;
   }
   
@@ -89,33 +89,41 @@ public class SchoolManager {
 	  return _school.getAllUsers();
   }
   
-  public void showAllUsers() {
+  public String showAllUsers() {
+	  
+	  String s="";
 	  HashMap<Integer, Person> personMap = getAllUsers();
 	  for (HashMap.Entry<Integer, Person> entry : personMap.entrySet()) {
-		  System.out.println(entry.getValue().toString());
+		  s += entry.getValue().toString();
 	  }
+	  
+	  return s;
   }
   
-  public void showUser(int id) {
-	  System.out.println(_school.getPerson(id).toString());
+  public String showUser(int id) {
+	  return _school.getPerson(id).toString();
   }
   
   public void setPhoneNr(int id, int phone) {
 	  _school.getPerson(id).setPhone(phone);
   }
-  
 
-  public void searchPerson(String name) {
+  public String searchPerson(String name) {
 	  
 	  HashMap<Integer, Person> personMap = getAllUsers();
+	  String s ="";
 	  
 	  for (HashMap.Entry<Integer, Person> entry : personMap.entrySet()) {
 		  if(entry.getValue().getName().equals(name))
-			  System.out.println(entry.getValue().toString());
+			  s += entry.getValue().toString();
 	  }
+	  
+	  return s;
   }
   
-  
+  public void doCreateProject(String nameDiscipline, String nameProject) {
+	  
+  }
   
   public void newDiscipline(String name, int cap, Course course) {
 	  Discipline d = new Discipline(name, cap, course);

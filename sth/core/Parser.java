@@ -48,7 +48,7 @@ public class Parser {
     phone = Integer.parseInt(components[2]);
 
     switch (components[0]) {
-      case "FUNCION¡RIO":
+      case "FUNCION√ÅRIO":
         _person = new Employee(id, phone, components[3]);
         break;
 

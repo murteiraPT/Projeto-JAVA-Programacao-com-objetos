@@ -1,9 +1,3 @@
-
-
-
-
-
-
 package sth.core;
 
 public class Person {
@@ -18,14 +12,13 @@ public class Person {
 		_phoneNumber = phone;
 	}
 
-	public String getName(){
-		return _name;
-	}
-
 	int getId(){
 		return _id;
 	}
-
+	
+	void setPhone(int number) {
+		_phoneNumber = number;
+	}
 	int getPhone(){
 		return _phoneNumber;
 	}
