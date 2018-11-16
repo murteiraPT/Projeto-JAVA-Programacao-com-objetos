@@ -13,52 +13,55 @@ public class Discipline {
 	private String _name;
 	private int _capacity;
 	private Course _course;
-	private Set<Project>  _projectSet;
-	private ArrayList<Student> _studentList;
-	private ArrayList<Teacher> _teacherList;
+	private HashMap<String, Project>  _projectMap;
+	private HashMap<String, Student> _studentMap;
+	private HashMap<String, Teacher> _teacherMap;
 	
 	public Discipline(String name, int c, Course course) {
 		_name = name;
 		_capacity = c;
 		_course = course;
-		_projectSet = new HashSet<>();
-		_studentList = new ArrayList<>();
-		_teacherList = new ArrayList<>();
+		_projectMap = new HashMap<>();
+		_studentMap = new HashMap<>();
+		_teacherMap = new HashMap<>();
 	}
 	
 	public Discipline(String name, Course course) {
 		_name = name;
 		_capacity = 300;
 		_course = course;
-		_projectSet = new HashSet<>();
-		_studentList = new ArrayList<>();
-		_teacherList = new ArrayList<>();
+		_projectMap = new HashMap<>();
+		_studentMap = new HashMap<>();
+		_teacherMap = new HashMap<>();
 	}
 	
 	public String getName() {
 		return _name;
 	}
 	
+	Project getProject(String name) {
+		return _projectMap.get(name);
+	}
+	
 	public Course getCourse() {
 		return _course;
 	}
 	
-	ArrayList<Student> getStudentList () {
-		return _studentList;
+	HashMap<String, Student> getStudentMap () {
+		return _studentMap;
 	} 
 	
 	void addTeacher(Teacher t) {
-		_teacherList.add(t);
+		_teacherMap.put(t.getName(), t);
 		t.addDiscipline(this);
 	}
 	
 	void enrollStudent(Student s) {
-		_studentList.add(s);
+		_studentMap.put(s.getName(), s);
 	}
 	
 	void createProject(String name, String description) {
 		final Project p = new Project(name, description);
-		_projectSet.add(p);
-	}
-		
+		_projectMap.put(name, p);
+	}		
 }

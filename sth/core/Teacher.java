@@ -5,11 +5,11 @@ import sth.core.exception.*;
 
 public class Teacher extends Person{
 
-	private Set<Discipline> _disciplineSet;
+	private HashMap<String, Discipline> _disciplineMap;
 
 	public Teacher(int id, int phone, String name){
 		super(id, phone, name);
-		_disciplineSet = new HashSet<>();
+		_disciplineMap = new HashMap<>();
 
 	}
 	@Override
@@ -26,13 +26,13 @@ public class Teacher extends Person{
 	 }
 	
 	void addDiscipline(Discipline d){
-		_disciplineSet.add(d);
+		_disciplineMap.put(d.getName(), d);
 	}
 	
 	void createProject(Discipline discipline, String name, String description ) throws NoSuchDisciplineIdException{
 		
-		if(!_disciplineSet.contains(discipline))
-			throw new NoSuchDisciplineIdException("discipline isnt exists");
+		if(!_disciplineMap.containsKey(discipline.getName()))
+			throw new NoSuchDisciplineIdException("Discipline dont exists");
 		discipline.createProject(name, description);
 	}
 	
@@ -41,17 +41,17 @@ public class Teacher extends Person{
 		
 		String text = "DOCENTE" + '|' + getId() + '|' + getPhone() + '|' + getName() + "\n";
 		
-		for(Discipline d : _disciplineSet){
+		for(Discipline d : _disciplineMap.values()){
 			text += "* " + d.getCourse().getName() + " - " + d.getName() + "\n"; 
 		}
 		
 		return text;
 	}
 
-	ArrayList<Student> getStudentsOfDiscipline(Discipline discipline) throws NoSuchDisciplineIdException{
-		if(!_disciplineSet.contains(discipline))	
+	HashMap<String, Student> getStudentsOfDiscipline(Discipline discipline) throws NoSuchDisciplineIdException{
+		if(!_disciplineMap.containsKey(discipline.getName()))	
 			throw new NoSuchDisciplineIdException("Discipline does not exists");
-		return discipline.getStudentList();
+		return discipline.getStudentMap();
 	}
 	
 }

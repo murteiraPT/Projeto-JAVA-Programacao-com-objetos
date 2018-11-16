@@ -18,7 +18,8 @@ public class SchoolManager {
   private School _school;
   private Person _loggedInUser;
 
-  public SchoolManager(School school) {
+  public SchoolManager() {
+	  School school = new School("IST");
 	  _school = school;
   }
   
@@ -122,16 +123,23 @@ public class SchoolManager {
 	  return s;
   }
   
+  
   public void doCreateProject(String nameDiscipline, String nameProject) {
-	  ArrayList<Course> courseList = _school.getCourseList();
-	  ArrayList<Discipline> disciplineList;
-	  for (Course c : courseList) {
-		  disciplineList = c.getDisciplineList();
-		  for (Discipline d : disciplineList) {
-			  if (d.getName().equals(nameDiscipline)) {
-				  	d.createProject(nameProject, "");
-			  		break;
-			  }
+	  HashMap<String, Course> courseMap = _school.getCourseMap();
+	  for(Course c : courseMap.values()) {
+		  if(c.getDiscipline(nameDiscipline)!= null) {
+			  c.getDiscipline(nameDiscipline).createProject(nameProject, "");
+			  break;
+		  }
+	  }
+  }
+  
+  public void doCloseProject(String nameDiscipline, String nameProject) {
+	  HashMap<String, Course> courseMap = _school.getCourseMap();
+	  for(Course c : courseMap.values()) {
+		  if(c.getDiscipline(nameDiscipline)!= null) {
+			  c.getDiscipline(nameDiscipline).getProject(nameProject).close();
+			  break;
 		  }
 	  }
   }

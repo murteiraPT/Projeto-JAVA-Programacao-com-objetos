@@ -2,6 +2,7 @@ package sth.app;
 
 import static pt.tecnico.po.ui.Dialog.IO;
 
+
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Menu;
 import sth.core.SchoolManager;

@@ -1,58 +1,66 @@
 package sth.core;
 
 import sth.core.exception.BadEntryException;
+import java.util.*;
 import sth.core.exception.NumberOfDelegatesExceed;
-import java.util.ArrayList;
-
 
 public class Course {
 	private String _name;
 	private int _numberOfRepresentatives;
-	private ArrayList<Discipline> _disciplineList;
-	private ArrayList<Student> _studentList;
+	private HashMap<String, Discipline> _disciplineMap;
+	private HashMap<String, Student> _studentMap;
 
 	public Course(String name){
 		_numberOfRepresentatives = 0;
 		_name = name;
-		_disciplineList = new ArrayList<>();
-		_studentList = new ArrayList<>();
+		_disciplineMap = new HashMap<>();
+		_studentMap = new HashMap<>();
 	}
 
 	public String getName(){
 		return _name;
 	}
 	
-	ArrayList<Discipline> getDisciplineList(){
-		return _disciplineList;
+	Discipline getDiscipline(String name) {
+		return _disciplineMap.get(name);
+	}
+	
+	Student getCourse(String name) {
+		return _studentMap.get(name);
+	}
+	
+	
+	HashMap<String, Discipline> getDisciplineMap(){
+		return _disciplineMap;
 	}
 
 	void addDiscipline(Discipline discipline) throws BadEntryException{
-		if(_disciplineList.contains(discipline))
+		if(_disciplineMap.containsKey(discipline.getName()))
 			throw new BadEntryException("Discipline already exists");
-		_disciplineList.add(discipline);
+		_disciplineMap.put(discipline.getName(), discipline);
 	}
 	
 	void addStudent(Student student) throws BadEntryException {
-		if(_studentList.contains(student))
+		if(_studentMap.containsKey(student.getName()))
 			throw new BadEntryException("Student already exists");
-		_studentList.add(student);
+		_studentMap.put(student.getName(), student);
 	}
 	
 	void addRepresentative(Student student) throws NumberOfDelegatesExceed, BadEntryException{
 		if(_numberOfRepresentatives > 7)
 			throw new NumberOfDelegatesExceed(_name);
-		if(!_studentList.contains(student))
+		if(!_studentMap.containsKey(student.getName()))
 			throw new BadEntryException("Student out of course");
 		student.setRepresentative(true);
+		_numberOfRepresentatives ++;
 	}
 
 	Discipline parseDiscipline(String name) {
-    	for ( Discipline d : _disciplineList){
-    		if(d.getName().equals(name))
-    			return d;
+    	if (_disciplineMap.get(name) == null) {
+        	Discipline discipline = new Discipline(name, this);
+        	_disciplineMap.put(name, discipline);
+        	return discipline;
     	}
-    	Discipline discipline = new Discipline(name, this);
-    	_disciplineList.add(discipline);
-    	return discipline;
+    	return _disciplineMap.get(name);
     }	
 }
