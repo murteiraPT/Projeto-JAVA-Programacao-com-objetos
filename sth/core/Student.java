@@ -6,7 +6,7 @@ import sth.core.exception.*;
 public class Student extends Person{
 
 	private boolean _isRepresentative;
-	private Set<Discipline> _disciplineSet;  
+	private HashMap<String, Discipline> _disciplineMap;  
 	private Course _course;
 
 	@Override
@@ -28,7 +28,7 @@ public class Student extends Person{
 	public Student(int id, int phone, String name, boolean isRepresentative){
 		super(id, phone, name);
 		_isRepresentative = isRepresentative;
-		_disciplineSet = new HashSet<>();
+		_disciplineMap = new HashMap<>();
 	}
 
 	Course getCourse(){
@@ -36,7 +36,7 @@ public class Student extends Person{
 	}
 
 	void addDiscipline (Discipline d){
-		_disciplineSet.add(d);
+		_disciplineMap.put(d.getName(), d);
 	}
 
 	void setRepresentative(boolean representative){
@@ -57,8 +57,7 @@ public class Student extends Person{
 		else
 			text = "ALUNO" + '|' + getId() + '|' + getPhone() + '|' + getName() + "\n";
 		
-		for(Discipline d : _disciplineSet)
-		{
+		for(Discipline d : _disciplineMap.values())	{
 			text += "* "  + _course.getName() +  " - " + d.getName() + "\n"; 
 		}
 		
