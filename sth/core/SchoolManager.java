@@ -150,5 +150,35 @@ public class SchoolManager {
 		  }
 	  }
   }
+  
+  public String doShowDisciplineStudents(String nameDiscipline) {
+	  HashMap<String, Course> courseMap = _school.getCourseMap();
+	  HashMap<String, Student> studentMap;
+	  
+	  String text = "";
+	  
+	  for(Course c : courseMap.values()) {
+		  if(c.getDiscipline(nameDiscipline)!= null) {
+			  studentMap = c.getDiscipline(nameDiscipline).getStudentMap();
+			  
+			  for(Student s : studentMap.values()) {
+				  text += s.toString();
+			  }
+			  break;
+		  }
+	  }
+	  
+	  return text;
+  }
+  
+  /*public void doDeliverProject(String nameDiscipline, String nameProject, String text) {
+	  	  
+  }
+  
+  public void doShowProjectSubmissions(String nameDiscipline, String nameProject) {
+	  
+  }*/
+  
+  
 
 }

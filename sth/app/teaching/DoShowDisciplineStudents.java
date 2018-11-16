@@ -12,20 +12,20 @@ import sth.core.SchoolManager;
  */
 public class DoShowDisciplineStudents extends Command<SchoolManager> {
 
-  //FIXME add input fields if needed
+	String _nameDiscipline;
 
-  /**
-   * @param receiver
-   */
-  public DoShowDisciplineStudents(SchoolManager receiver) {
-    super(Label.SHOW_COURSE_STUDENTS, receiver);
-    //FIXME initialize input fields if needed
-  }
+	/**
+	 * @param receiver
+	 */
+	public DoShowDisciplineStudents(SchoolManager receiver) {
+		super(Label.SHOW_COURSE_STUDENTS, receiver);
+		_nameDiscipline = _form.addStringInput(Message.requestDisciplineName());
+	}
 
-  /** @see pt.tecnico.po.ui.Command#execute() */
-  @Override
-  public final void execute() throws DialogException {
-    //FIXME implement command
-  }
+	/** @see pt.tecnico.po.ui.Command#execute() */
+	@Override
+	public final void execute() throws DialogException {
+		_receiver.doShowDisciplineStudents(_nameDiscipline);
+	}
 
 }

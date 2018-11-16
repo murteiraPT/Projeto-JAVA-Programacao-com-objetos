@@ -12,17 +12,19 @@ import sth.core.exception.NoSuchDisciplineIdException;
  */
 public class DoCloseProject extends sth.app.common.ProjectCommand {
 
-  /**
-   * @param receiver
-   */
-  public DoCloseProject(SchoolManager receiver) {
-    super(Label.CLOSE_PROJECT, receiver);
-  }
+	String _nameDiscipline;
+	String _nameProject;
+	
+	public DoCloseProject(SchoolManager receiver) {
+		super(Label.CLOSE_PROJECT, receiver);
+	    _nameDiscipline = _form.addStringInput(Message.requestDisciplineName());
+	    _nameProject = _form.addStringInput(Message.requestProjectName());
+	}
 
-  /** @see sth.app.common.ProjectCommand#myExecute() */
-  @Override
-  public final void myExecute() throws DialogException, NoSuchDisciplineIdException, NoSuchProjectIdException {
-    //FIXME implement command
-  }
+	/** @see sth.app.common.ProjectCommand#myExecute() */
+	@Override
+	public final void myExecute() throws DialogException, NoSuchDisciplineIdException, NoSuchProjectIdException {
+		_receiver.doCloseProject(_nameDiscipline, _nameProject);
+	}
 
 }
