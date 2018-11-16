@@ -24,11 +24,11 @@ public class DoSearchPerson extends Command<SchoolManager> {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() {
-	  
-    String text = _receiver.searchPerson(_name.value());
+	  _form.parse();
+	  String text = _receiver.searchPerson(_name.value());
     
-    _display.add(text);
-    _display.display();
+	  _display.add(text);
+	  _display.display();
     
   }
 

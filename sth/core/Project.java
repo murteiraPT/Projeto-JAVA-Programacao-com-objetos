@@ -2,7 +2,7 @@ package sth.core;
 
 import java.util.*;
 
-public class Project{
+public class Project implements java.io.Serializable{
 	private String _name;
 	private String _description;
 	private Boolean _isOpen;

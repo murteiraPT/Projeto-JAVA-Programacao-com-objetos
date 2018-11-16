@@ -49,8 +49,9 @@ public class School implements java.io.Serializable {
     void addPerson(Person person) throws BadEntryException{
         if (_personMap.containsKey(person.getId()))
         	throw new BadEntryException("Person already exists");
-            _nextPersonID++;
-            _personMap.put(_nextPersonID, person);
+            
+        _nextPersonID++;
+        _personMap.put(person.getId(), person);
     }
 
     void addCourse(Course course) throws BadEntryException{

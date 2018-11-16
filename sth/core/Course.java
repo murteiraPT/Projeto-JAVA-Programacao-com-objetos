@@ -4,7 +4,7 @@ import sth.core.exception.BadEntryException;
 import java.util.*;
 import sth.core.exception.NumberOfDelegatesExceed;
 
-public class Course {
+public class Course implements java.io.Serializable {
 	private String _name;
 	private int _numberOfRepresentatives;
 	private HashMap<String, Discipline> _disciplineMap;

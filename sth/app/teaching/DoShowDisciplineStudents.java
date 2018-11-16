@@ -25,6 +25,7 @@ public class DoShowDisciplineStudents extends Command<SchoolManager> {
 	/** @see pt.tecnico.po.ui.Command#execute() */
 	@Override
 	public final void execute() throws DialogException {
+		_form.parse();
 		String text = _receiver.doShowDisciplineStudents(_nameDiscipline.value());
 		
 		_display.add(text);

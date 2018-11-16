@@ -2,7 +2,7 @@ package sth.core;
 
 import sth.core.exception.BadEntryException;
 
-public class Person {
+public class Person implements java.io.Serializable {
 
 	private int _id;
 	private String _name;

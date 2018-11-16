@@ -25,7 +25,8 @@ public class DoChangePhoneNumber extends Command<SchoolManager> {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() {
-    _receiver.setPhoneNr(Integer.parseInt(_numberPhone.value()));
+	  _form.parse();
+	  _receiver.setPhoneNr(Integer.parseInt(_numberPhone.value()));
   }
 
 }

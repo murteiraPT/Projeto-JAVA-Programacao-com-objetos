@@ -3,7 +3,7 @@ package sth.core;
 import java.util.*;
 import sth.core.exception.*;
 
-public class Student extends Person{
+public class Student extends Person implements java.io.Serializable{
 
 	private boolean _isRepresentative;
 	private HashMap<String, Discipline> _disciplineMap;  

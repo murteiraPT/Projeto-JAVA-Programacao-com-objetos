@@ -9,7 +9,7 @@ import java.util.*;
 
 
 
-public class Discipline {
+public class Discipline implements java.io.Serializable {
 	private String _name;
 	private int _capacity;
 	private Course _course;

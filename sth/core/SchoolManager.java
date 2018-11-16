@@ -61,7 +61,7 @@ public class SchoolManager {
    * @return true when the currently logged in person is a professor
    */
   public boolean isLoggedUserProfessor() {
-	  return _loggedInUser instanceof Employee;
+	  return _loggedInUser instanceof Teacher;
   }
 
   /**
@@ -73,7 +73,8 @@ public class SchoolManager {
 
   /**
    * @return true when the currently logged in person is a representative
-   */
+   */  
+  
   public boolean isLoggedUserRepresentative() {
 	  if(!isLoggedUserStudent())
 		  return false;
