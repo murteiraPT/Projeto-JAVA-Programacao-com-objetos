@@ -13,8 +13,8 @@ import sth.core.exception.NoSuchProjectIdException;
  */
 public class DoCreateProject extends sth.app.common.ProjectCommand {
 
-	String _nameDiscipline;
-	String _nameProject;
+	Input <String> _nameDiscipline;
+	Input <String> _nameProject;
 	
   /**
    * @param receiver
@@ -28,7 +28,7 @@ public class DoCreateProject extends sth.app.common.ProjectCommand {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void myExecute() throws DialogException, NoSuchDisciplineIdException, NoSuchProjectIdException {
-	  _receiver.doCreateProject(_nameDiscipline, _nameProject);
+	  _receiver.doCreateProject(_nameDiscipline.value(), _nameProject.value());
   }
 
 }

@@ -12,20 +12,20 @@ import sth.core.SchoolManager;
  */
 public class DoChangePhoneNumber extends Command<SchoolManager> {
 
-  String _numberPhone;
+  Input<String> _numberPhone;
 
   /**
    * @param receiver
    */
   public DoChangePhoneNumber(SchoolManager receiver) {
     super(Label.CHANGE_PHONE_NUMBER, receiver);
-    _numberPhone = _form.addStringInput(Message.requestPhoneId());
+    _numberPhone = _form.addStringInput(Message.requestPhoneNumber());
   }
 
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() {
-    _receiver.setPhoneNr(_numberPhone);
+    _receiver.setPhoneNr(Integer.parseInt(_numberPhone.value()));
   }
 
 }
