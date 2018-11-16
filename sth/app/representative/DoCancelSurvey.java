@@ -5,7 +5,6 @@ import pt.tecnico.po.ui.Input;
 import sth.core.SchoolManager;
 
 import sth.core.exception.NoSuchDisciplineIdException;
-import sth.core.exception.NoSuchProjectIdException;
 
 /**
  * 4.5.2. Cancel survey.
@@ -22,7 +21,7 @@ public class DoCancelSurvey extends sth.app.common.ProjectCommand {
 
   /** @see sth.app.common.ProjectCommand#myExecute() */
   @Override
-  public final void myExecute() throws NoSuchProjectIdException, NoSuchDisciplineIdException, DialogException {
+  public final void myExecute() throws NoSuchDisciplineIdException, DialogException {
     //FIXME implement command
   }
 

@@ -4,6 +4,7 @@ import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
 import sth.core.SchoolManager;
+import pt.tecnico.po.ui.Form;
 
 //FIXME import other classes if needed
 
