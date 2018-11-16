@@ -10,7 +10,7 @@ import sth.core.SchoolManager;
  * 4.2.1. Show person.
  */
 public class DoShowPerson extends Command<SchoolManager> {
-
+	String show;
   //FIXME add input fields if needed
 
   /**
@@ -18,13 +18,16 @@ public class DoShowPerson extends Command<SchoolManager> {
    */
   public DoShowPerson(SchoolManager receiver) {
     super(Label.SHOW_PERSON, receiver);
-    //FIXME initialize input fields if needed
+    
   }
 
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() {
-	  _receiver.showUser();
+	 show = _receiver.showUser();
+	 _display.add(show);
+	 _display.display();
+	  
   }
 
 }

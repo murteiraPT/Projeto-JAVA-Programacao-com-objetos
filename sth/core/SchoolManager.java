@@ -93,8 +93,8 @@ public class SchoolManager {
   
   //4.3 abaixo
   
-  public void showUser() {
-	  _loggedInUser.toString();
+  public String showUser() {
+	  return _loggedInUser.toString();
   }
   
   public void showAllUsers() {
@@ -104,7 +104,7 @@ public class SchoolManager {
               new Comparator<Integer>() {
                   @Override
                   public int compare(Integer o1, Integer o2) {
-                      return o1.compareTo(o2	);
+                      return o1.compareTo(o2);
                   }
               });
 	  treeMap.putAll(unsortMap);
