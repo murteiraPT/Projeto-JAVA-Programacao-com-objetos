@@ -11,7 +11,7 @@ import sth.core.SchoolManager;
  */
 public class DoSearchPerson extends Command<SchoolManager> {
 
-  String _name;
+  Input<String> _name;
   
   /**
    * @param receiver
@@ -24,7 +24,12 @@ public class DoSearchPerson extends Command<SchoolManager> {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() {
-    _receiver.searchPerson(_name);
+	  
+    String text = _receiver.searchPerson(_name.value());
+    
+    _display.add(text);
+    _display.display();
+    
   }
 
 }

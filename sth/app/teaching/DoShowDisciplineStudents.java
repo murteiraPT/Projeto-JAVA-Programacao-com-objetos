@@ -6,14 +6,13 @@ import pt.tecnico.po.ui.Input;
 import sth.core.SchoolManager;
 import pt.tecnico.po.ui.Form;
 
-//FIXME import other classes if needed
 
 /**
  * 4.4.4. Show course students.
  */
 public class DoShowDisciplineStudents extends Command<SchoolManager> {
 
-	String _nameDiscipline;
+	Input <String> _nameDiscipline;
 
 	/**
 	 * @param receiver
@@ -26,7 +25,10 @@ public class DoShowDisciplineStudents extends Command<SchoolManager> {
 	/** @see pt.tecnico.po.ui.Command#execute() */
 	@Override
 	public final void execute() throws DialogException {
-		_receiver.doShowDisciplineStudents(_nameDiscipline);
+		String text = _receiver.doShowDisciplineStudents(_nameDiscipline.value());
+		
+		_display.add(text);
+		_display.display();
 	}
 
 }

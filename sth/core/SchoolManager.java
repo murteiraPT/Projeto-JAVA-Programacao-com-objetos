@@ -97,9 +97,9 @@ public class SchoolManager {
 	  return _loggedInUser.toString();
   }
   
-  public void showAllUsers() {
+  public String showAllUsers() {
 	  HashMap<Integer, Person> unsortMap = _school.getAllUsers();
-	  
+	  String text ="";
 	  Map<Integer, Person> treeMap = new TreeMap<Integer, Person>(
               new Comparator<Integer>() {
                   @Override
@@ -109,8 +109,9 @@ public class SchoolManager {
               });
 	  treeMap.putAll(unsortMap);
 	  for(Person p : treeMap.values()) {
-		  p.toString();
+		  text += p.toString();
 	  }
+	  return text;
   }
     
   public void setPhoneNr(int phone) {
