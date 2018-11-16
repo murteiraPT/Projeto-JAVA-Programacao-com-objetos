@@ -26,7 +26,8 @@ public class School implements java.io.Serializable {
     */
 
     void importFile(String filename) throws IOException, BadEntryException {
-    	
+    	Parser p = new Parser(this);
+    	p.parseFile(filename);
     }
 
 

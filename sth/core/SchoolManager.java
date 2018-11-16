@@ -141,6 +141,7 @@ public class SchoolManager {
 	  }
   }
   
+  
   public void doCloseProject(String nameDiscipline, String nameProject) {
 	  HashMap<String, Course> courseMap = _school.getCourseMap();
 	  for(Course c : courseMap.values()) {

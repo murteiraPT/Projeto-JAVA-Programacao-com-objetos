@@ -11,7 +11,6 @@ import sth.core.SchoolManager;
  */
 public class DoShowPerson extends Command<SchoolManager> {
 	String show;
-  //FIXME add input fields if needed
 
   /**
    * @param receiver
