@@ -91,25 +91,32 @@ public class SchoolManager {
 	  return _school.getAllUsers();
   }
   
-  public String showAllUsers() {
+  //4.3 abaixo
+  
+  public void showUser() {
+	  _loggedInUser.toString();
+  }
+  
+  public void showAllUsers() {
+	  HashMap<Integer, Person> unsortMap = _school.getAllUsers();
 	  
-	  String s="";
-	  HashMap<Integer, Person> personMap = getAllUsers();
-	  for (HashMap.Entry<Integer, Person> entry : personMap.entrySet()) {
-		  s += entry.getValue().toString();
+	  Map<Integer, Person> treeMap = new TreeMap<Integer, Person>(
+              new Comparator<Integer>() {
+                  @Override
+                  public int compare(Integer o1, Integer o2) {
+                      return o1.compareTo(o2	);
+                  }
+              });
+	  treeMap.putAll(unsortMap);
+	  for(Person p : treeMap.values()) {
+		  p.toString();
 	  }
-	  
-	  return s;
+  }
+    
+  public void setPhoneNr(int phone) {
+	  _loggedInUser.setPhone(phone);
   }
   
-  public String showUser(int id) {
-	  return _school.getPerson(id).toString();
-  }
-  
-  public void setPhoneNr(int id, int phone) {
-	  _school.getPerson(id).setPhone(phone);
-  }
-
   public String searchPerson(String name) {
 	  
 	  HashMap<Integer, Person> personMap = getAllUsers();
