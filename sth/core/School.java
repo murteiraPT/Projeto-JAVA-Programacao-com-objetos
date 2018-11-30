@@ -9,7 +9,7 @@ import java.util.*;
  * School implementation.
  */
 /**
- * @author António Murteira, Tiago Neves
+ * @author Antonio Murteira, Tiago Neves
  *
  */
 

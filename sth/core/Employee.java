@@ -11,7 +11,7 @@ public class Employee extends Person implements java.io.Serializable{
 	@Override
 	public String toString(){
 		
-		String text = "FUNCIONARIO" + '|' + getId() + '|' + getPhone() + '|' + getName() + "\n";
+		String text = "FUNCIONÁRIO" + '|' + getId() + '|' + getPhone() + '|' + getName() + "\n";
 
 		return text;
 	}

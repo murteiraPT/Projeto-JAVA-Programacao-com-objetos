@@ -39,9 +39,14 @@ public class Teacher extends Person{
 	@Override
 	public String toString(){
 		
+		/*Para ordenar a lista de disciplinas por nome*/
+		List<Discipline> listOrderDiscipline = new ArrayList<>(_disciplineMap.values());
+		Collections.sort(listOrderDiscipline, Comparator.comparing(Discipline::getName));
+		
+		
 		String text = "DOCENTE" + '|' + getId() + '|' + getPhone() + '|' + getName() + "\n";
 		
-		for(Discipline d : _disciplineMap.values()){
+		for(Discipline d : listOrderDiscipline){
 			text += "* " + d.getCourse().getName() + " - " + d.getName() + "\n"; 
 		}
 		

@@ -13,6 +13,7 @@ import sth.core.SchoolManager;
 public class DoChangePhoneNumber extends Command<SchoolManager> {
 
   Input<String> _numberPhone;
+  String show;
 
   /**
    * @param receiver
@@ -26,7 +27,9 @@ public class DoChangePhoneNumber extends Command<SchoolManager> {
   @Override
   public final void execute() {
 	  _form.parse();
-	  _receiver.setPhoneNr(Integer.parseInt(_numberPhone.value()));
+	  show = _receiver.setPhoneNr(Integer.parseInt(_numberPhone.value()));
+	  _display.add(show);
+	  _display.display();
   }
 
 }

@@ -115,8 +115,11 @@ public class SchoolManager {
 	  return text;
   }
     
-  public void setPhoneNr(int phone) {
+  public String setPhoneNr(int phone) {
+	  
 	  _loggedInUser.setPhone(phone);
+	  
+	  return _loggedInUser.toString();
   }
   
   public String searchPerson(String name) {
@@ -125,7 +128,7 @@ public class SchoolManager {
 	  String s ="";
 	  
 	  for (HashMap.Entry<Integer, Person> entry : personMap.entrySet()) {
-		  if(entry.getValue().getName().equals(name))
+		  if(entry.getValue().getName().contains(name))
 			  s += entry.getValue().toString();
 	  }
 	  

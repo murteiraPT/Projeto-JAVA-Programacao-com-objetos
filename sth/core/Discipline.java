@@ -58,6 +58,7 @@ public class Discipline implements java.io.Serializable {
 	
 	void enrollStudent(Student s) {
 		_studentMap.put(s.getName(), s);
+		s.addDiscipline(this);
 	}
 	
 	void createProject(String name, String description) {

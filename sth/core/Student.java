@@ -52,12 +52,17 @@ public class Student extends Person implements java.io.Serializable{
 	public String toString(){
 		String text;
 		
+		/*Para ordenar a lista de disciplinas por nome*/
+		List<Discipline> listOrderDiscipline = new ArrayList<>(_disciplineMap.values());
+		Collections.sort(listOrderDiscipline, Comparator.comparing(Discipline::getName));
+		
+		
 		if(_isRepresentative)
 			text = "DELEGADO" + '|' + getId() + '|' + getPhone() + '|' + getName() + "\n";
 		else
 			text = "ALUNO" + '|' + getId() + '|' + getPhone() + '|' + getName() + "\n";
 		
-		for(Discipline d : _disciplineMap.values())	{
+		for(Discipline d : listOrderDiscipline)	{
 			text += "* "  + _course.getName() +  " - " + d.getName() + "\n"; 
 		}
 		
