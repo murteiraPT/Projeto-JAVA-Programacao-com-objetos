@@ -1,6 +1,7 @@
 package sth.core;
 
 import sth.core.exception.BadEntryException;
+import sth.core.exception.NoSuchPersonIdException;
 
 import java.io.IOException;
 import java.util.*;
@@ -51,8 +52,15 @@ public class School implements java.io.Serializable {
      * @param id
      * @return HashMap<Integer, Person>
      */
-    Person getPerson (int id){
-        return _personMap.get(id);
+    boolean ExistId(int id){
+    	return _personMap.containsKey(id);
+    }
+    
+    Person getPerson (int id) throws NoSuchPersonIdException{
+    	if(ExistId(id))
+    		return _personMap.get(id);
+    	else
+    		throw new NoSuchPersonIdException(id);
     }
     
     /**

@@ -7,17 +7,17 @@ public class NoSuchProjectIdException extends Exception {
   private static final long serialVersionUID = 201809021324L;
 
   /** Person id. */
-  private int _id;
+  private String _id;
 
   /**
    * @param id
    */
-  public NoSuchProjectIdException(int id) {
+  public NoSuchProjectIdException(String id) {
     _id = id;
   }
 
   /** @return id */
-  public int getId() {
+  public String getId() {
     return _id;
   }
 

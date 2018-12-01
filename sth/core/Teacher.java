@@ -29,10 +29,11 @@ public class Teacher extends Person{
 		_disciplineMap.put(d.getName(), d);
 	}
 	
-	void createProject(Discipline discipline, String name, String description ) throws NoSuchDisciplineIdException{
+	void createProject(Discipline discipline, String name, String description ) throws NoSuchDisciplineIdException, DuplicateIdProjectException{
 		
 		if(!_disciplineMap.containsKey(discipline.getName()))
 			throw new NoSuchDisciplineIdException("Discipline dont exists");
+		
 		discipline.createProject(name, description);
 	}
 	
@@ -52,7 +53,19 @@ public class Teacher extends Person{
 		
 		return text;
 	}
-
+	
+	Discipline getDiscipline(String nameDisc) throws NoSuchDisciplineIdException{
+		for (Map.Entry<String, Discipline> entry : _disciplineMap.entrySet()) {
+			Discipline value = entry.getValue();
+		    
+		    if(value.getName().equals(nameDisc))
+		    	return value;
+		}
+		
+		throw new NoSuchDisciplineIdException(nameDisc);
+	}
+	
+	
 	HashMap<String, Student> getStudentsOfDiscipline(Discipline discipline) throws NoSuchDisciplineIdException{
 		if(!_disciplineMap.containsKey(discipline.getName()))	
 			throw new NoSuchDisciplineIdException("Discipline does not exists");

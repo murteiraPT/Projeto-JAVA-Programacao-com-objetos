@@ -1,8 +1,12 @@
 package sth.core;
 
+import sth.app.exception.NoSuchDisciplineException;
 import sth.core.exception.BadEntryException;
 import sth.core.exception.ImportFileException;
+import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.NoSuchPersonIdException;
+import sth.core.exception.NoSuchProjectIdException;
+import sth.core.exception.DuplicateIdProjectException;
 
 import java.util.*;
 import java.io.IOException;
@@ -17,10 +21,22 @@ public class SchoolManager {
   //FIXME add object attributes if needed
   private School _school;
   private Person _loggedInUser;
+  private String _serialFile;
 
   public SchoolManager() {
-	  School school = new School("IST");
-	  _school = school;
+	  _school = new School("IST");
+  }
+  
+  public String getSerialFile() {
+	  return _serialFile;
+  }
+  
+  public void setSerialFile(String serial) {
+	  _serialFile = serial;
+  }
+  
+  public School getSchool() {
+	  return _school;
   }
   
   /**
@@ -34,6 +50,18 @@ public class SchoolManager {
     } catch (IOException | BadEntryException e) {
       throw new ImportFileException(e);
     }
+  }
+  
+  public void updateSchool(School newS) throws NoSuchPersonIdException{
+	  int idUser = _loggedInUser.getId();
+	  
+	  if(newS.ExistId(idUser))
+	  {
+		  _school = newS;
+		  login(idUser);
+	  }
+	  else
+		  throw new NoSuchPersonIdException(idUser);
   }
   
 
@@ -136,43 +164,43 @@ public class SchoolManager {
   }
   
   
-  public void doCreateProject(String nameDiscipline, String nameProject) {
-	  HashMap<String, Course> courseMap = _school.getCourseMap();
-	  for(Course c : courseMap.values()) {
-		  if(c.getDiscipline(nameDiscipline)!= null) {
-			  c.getDiscipline(nameDiscipline).createProject(nameProject, "");
-			  break;
-		  }
+  public void doCreateProject(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, DuplicateIdProjectException{
+	  if(isLoggedUserProfessor())
+	  {
+		 ((Teacher) _loggedInUser).getDiscipline(nameDiscipline).createProject(nameProject, "");
 	  }
   }
   
   
-  public void doCloseProject(String nameDiscipline, String nameProject) {
-	  HashMap<String, Course> courseMap = _school.getCourseMap();
-	  for(Course c : courseMap.values()) {
-		  if(c.getDiscipline(nameDiscipline)!= null) {
-			  c.getDiscipline(nameDiscipline).getProject(nameProject).close();
-			  break;
-		  }
+  public void doCloseProject(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, NoSuchProjectIdException {
+	  if(isLoggedUserProfessor())
+	  {
+		 ((Teacher) _loggedInUser).getDiscipline(nameDiscipline).closeProject(nameProject);
 	  }
-  }
+  }	
   
-  public String doShowDisciplineStudents(String nameDiscipline) {
+  public String doShowDisciplineStudents(String nameDiscipline) throws NoSuchDisciplineIdException, NoSuchDisciplineException{
 	  HashMap<String, Course> courseMap = _school.getCourseMap();
 	  HashMap<String, Student> studentMap;
 	  
 	  String text = "";
 	  
-	  for(Course c : courseMap.values()) {
-		  if(c.getDiscipline(nameDiscipline)!= null) {
-			  studentMap = c.getDiscipline(nameDiscipline).getStudentMap();
-			  
-			  for(Student s : studentMap.values()) {
-				  text += s.toString();
+	  if(((Teacher)_loggedInUser).getDiscipline(nameDiscipline)!=null)
+	  {
+		  for(Course c : courseMap.values()) {
+			  if(c.getDiscipline(nameDiscipline)!= null) {
+				  studentMap = c.getDiscipline(nameDiscipline).getStudentMap();
+				  
+				  for(Student s : studentMap.values()) {
+					  text += s.toString();
+				  }
+				  break;
 			  }
-			  break;
 		  }
 	  }
+	  
+	  if(text=="")
+		  throw new NoSuchDisciplineException(nameDiscipline);
 	  
 	  return text;
   }

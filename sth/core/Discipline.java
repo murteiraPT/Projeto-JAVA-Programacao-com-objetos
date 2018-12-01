@@ -1,8 +1,10 @@
 package sth.core;
 
 import sth.core.exception.BadEntryException;
+import sth.core.exception.DuplicateIdProjectException;
 import sth.core.exception.ImportFileException;
 import sth.core.exception.NoSuchPersonIdException;
+import sth.core.exception.NoSuchProjectIdException;
 
 import java.io.IOException;
 import java.util.*;
@@ -61,8 +63,33 @@ public class Discipline implements java.io.Serializable {
 		s.addDiscipline(this);
 	}
 	
-	void createProject(String name, String description) {
+	void createProject(String name, String description) throws DuplicateIdProjectException{
+		
+		for (Map.Entry<String, Project> entry : _projectMap.entrySet()) {
+		    Project value = entry.getValue();
+		    
+		    if(value.getName().equals(name))
+		    	throw new DuplicateIdProjectException(_name,name);
+		}
+		
 		final Project p = new Project(name, description);
 		_projectMap.put(name, p);
-	}		
+	}	
+	
+	void closeProject(String name) throws NoSuchProjectIdException{
+		for (Map.Entry<String, Project> entry : _projectMap.entrySet()) {
+		    Project value = entry.getValue();
+		    
+		    if(value.getName().equals(name)){
+		    	value.close();
+		    	return;
+		    }
+		}
+		
+		throw new NoSuchProjectIdException(name);
+		
+	}
+	
+	
+	
 }

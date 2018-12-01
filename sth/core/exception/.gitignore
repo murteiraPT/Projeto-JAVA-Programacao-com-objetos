@@ -4,3 +4,4 @@
 /NoSuchPersonIdException.class
 /NoSuchProjectIdException.class
 /NumberOfDelegatesExceed.class
+/DuplicateIdProjectException.class

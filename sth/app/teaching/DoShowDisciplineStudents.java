@@ -3,7 +3,9 @@ package sth.app.teaching;
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
+import sth.app.exception.NoSuchDisciplineException;
 import sth.core.SchoolManager;
+import sth.core.exception.NoSuchDisciplineIdException;
 import pt.tecnico.po.ui.Form;
 
 
@@ -24,12 +26,18 @@ public class DoShowDisciplineStudents extends Command<SchoolManager> {
 
 	/** @see pt.tecnico.po.ui.Command#execute() */
 	@Override
-	public final void execute() throws DialogException {
-		_form.parse();
-		String text = _receiver.doShowDisciplineStudents(_nameDiscipline.value());
-		
-		_display.add(text);
-		_display.display();
+	public final void execute() throws DialogException, NoSuchDisciplineException {
+		try {
+			_form.parse();
+			String text = _receiver.doShowDisciplineStudents(_nameDiscipline.value());
+			
+			_display.add(text);
+			_display.display();
+		}
+		catch(NoSuchDisciplineIdException e)
+		{
+			throw new NoSuchDisciplineException(e.getId());
+		}
 	}
 
 }

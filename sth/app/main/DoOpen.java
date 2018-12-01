@@ -1,13 +1,21 @@
 package sth.app.main;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+
 import sth.core.exception.ImportFileException;
 
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
+
 import sth.core.SchoolManager;
+import sth.core.exception.NoSuchPersonIdException;
+import sth.app.exception.NoSuchPersonException;
+import sth.core.School;
+
 
 //FIXME import other classes if needed
 
@@ -28,13 +36,22 @@ public class DoOpen extends Command<SchoolManager> {
 
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
-  public final void execute() throws DialogException {
-    try {
-      _receiver.importFile(_nameFile.value());
-      
-    }catch (ImportFileException fnfe) {
-      _display.popup(Message.fileNotFound());
+  public final void execute() throws DialogException, NoSuchPersonException {
+	  _form.parse();
+	  String _serial = _nameFile.value();
+    try (ObjectInputStream obj = new ObjectInputStream(new FileInputStream(_serial)))
+    {
+      _receiver.updateSchool( (School) obj.readObject() );
     }
+    catch (FileNotFoundException fnfe) {
+		_display.popup(Message.fileNotFound());
+	} 
+	catch (ClassNotFoundException | IOException e) {
+		e.printStackTrace();
+	}
+	catch (NoSuchPersonIdException np) {
+		throw new NoSuchPersonException(np.getId());
+	}
   }
 
 }
