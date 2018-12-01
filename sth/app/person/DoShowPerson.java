@@ -10,8 +10,8 @@ import sth.core.SchoolManager;
  * 4.2.1. Show person.
  */
 public class DoShowPerson extends Command<SchoolManager> {
-	String show;
-
+	
+	private String show;
   /**
    * @param receiver
    */

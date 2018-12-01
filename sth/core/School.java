@@ -19,6 +19,7 @@ public class School implements java.io.Serializable {
 
     /** Serial number for serialization. */
     private static final long serialVersionUID = 201810051538L;
+    private static final int ID_START = 100000;
 
     private String _name;
     private static int _nextPersonID;
@@ -42,7 +43,7 @@ public class School implements java.io.Serializable {
      */
     public School(String name){
         _name = name;
-        _nextPersonID = 100000;
+        _nextPersonID = ID_START;
         _courseMap = new HashMap<>();
         _personMap = new HashMap<>();
     }

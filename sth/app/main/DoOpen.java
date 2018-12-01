@@ -24,7 +24,7 @@ import sth.core.School;
  */
 public class DoOpen extends Command<SchoolManager> {
 
-  Input<String> _nameFile;
+  private Input<String> _nameFile;
   
   /**
    * @param receiver

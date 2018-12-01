@@ -12,8 +12,8 @@ import sth.core.SchoolManager;
  */
 public class DoChangePhoneNumber extends Command<SchoolManager> {
 
-  Input<String> _numberPhone;
-  String show;
+  private Input<String> _numberPhone;
+  private String show;
 
   /**
    * @param receiver

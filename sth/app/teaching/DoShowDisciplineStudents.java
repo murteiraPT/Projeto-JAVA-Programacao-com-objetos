@@ -14,7 +14,7 @@ import pt.tecnico.po.ui.Form;
  */
 public class DoShowDisciplineStudents extends Command<SchoolManager> {
 
-	Input <String> _nameDiscipline;
+	private Input <String> _nameDiscipline;
 
 	/**
 	 * @param receiver
