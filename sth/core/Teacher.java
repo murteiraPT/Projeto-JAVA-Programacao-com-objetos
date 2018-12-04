@@ -5,11 +5,11 @@ import sth.core.exception.*;
 
 public class Teacher extends Person{
 
-	private HashMap<String, Discipline> _disciplineMap;
+	private List<Discipline> _disciplineList;
 
 	public Teacher(int id, int phone, String name){
 		super(id, phone, name);
-		_disciplineMap = new HashMap<>();
+		_disciplineList = new ArrayList<>();
 
 	}
 	@Override
@@ -26,12 +26,12 @@ public class Teacher extends Person{
 	 }
 	
 	void addDiscipline(Discipline d){
-		_disciplineMap.put(d.getName(), d);
+		_disciplineList.add(d);
 	}
 	
 	void createProject(Discipline discipline, String name, String description ) throws NoSuchDisciplineIdException, DuplicateIdProjectException{
 		
-		if(!_disciplineMap.containsKey(discipline.getName()))
+		if(!_disciplineList.contains(discipline))
 			throw new NoSuchDisciplineIdException("Discipline dont exists");
 		
 		discipline.createProject(name, description);
@@ -40,23 +40,38 @@ public class Teacher extends Person{
 	@Override
 	public String toString(){
 		
-		/*Para ordenar a lista de disciplinas por nome*/
-		List<Discipline> listOrderDiscipline = new ArrayList<>(_disciplineMap.values());
-		Collections.sort(listOrderDiscipline, Comparator.comparing(Discipline::getName));
 		
+		List<Course> listCourse = new ArrayList<>();
+		
+		for(Discipline d : _disciplineList) {
+			listCourse.add(d.getCourse());
+		}
+		Collections.sort(listCourse, Comparator.comparing(Course::getName));
+		
+		List<Discipline> listDiscipline = new ArrayList<>();
+		listDiscipline.addAll(_disciplineList);
+		List<Discipline> sortedDisciplineList;
 		
 		String text = "DOCENTE" + '|' + getId() + '|' + getPhone() + '|' + getName() + "\n";
 		
-		for(Discipline d : listOrderDiscipline){
-			text += "* " + d.getCourse().getName() + " - " + d.getName() + "\n"; 
+		
+		for(Course c : listCourse) {
+			sortedDisciplineList = c.getSortedDisciplineList();
+			for(Discipline d : sortedDisciplineList) {
+				if(listDiscipline.contains(d))
+				{
+					text += "* " + c.getName() + " - " + d.getName() + "\n";
+					listDiscipline.remove(d);
+				}
+			}
 		}
 		
 		return text;
 	}
 	
 	Discipline getDiscipline(String nameDisc) throws NoSuchDisciplineIdException{
-		for (Map.Entry<String, Discipline> entry : _disciplineMap.entrySet()) {
-			Discipline value = entry.getValue();
+		for (Discipline entry : _disciplineList) {
+			Discipline value = entry;
 		    
 		    if(value.getName().equals(nameDisc))
 		    	return value;
@@ -66,8 +81,8 @@ public class Teacher extends Person{
 	}
 	
 	
-	HashMap<String, Student> getStudentsOfDiscipline(Discipline discipline) throws NoSuchDisciplineIdException{
-		if(!_disciplineMap.containsKey(discipline.getName()))	
+	HashMap<Integer, Student> getStudentsOfDiscipline(Discipline discipline) throws NoSuchDisciplineIdException{
+		if(!_disciplineList.contains(discipline.getName()))	
 			throw new NoSuchDisciplineIdException("Discipline does not exists");
 		return discipline.getStudentMap();
 	}

@@ -16,7 +16,7 @@ public class Discipline implements java.io.Serializable {
 	private int _capacity;
 	private Course _course;
 	private HashMap<String, Project>  _projectMap;
-	private HashMap<String, Student> _studentMap;
+	private HashMap<Integer, Student> _studentMap;
 	private HashMap<String, Teacher> _teacherMap;
 	
 	public Discipline(String name, int c, Course course) {
@@ -49,7 +49,7 @@ public class Discipline implements java.io.Serializable {
 		return _course;
 	}
 	
-	HashMap<String, Student> getStudentMap () {
+	HashMap<Integer, Student> getStudentMap () {
 		return _studentMap;
 	} 
 	
@@ -59,7 +59,7 @@ public class Discipline implements java.io.Serializable {
 	}
 	
 	void enrollStudent(Student s) {
-		_studentMap.put(s.getName(), s);
+		_studentMap.put(s.getId(), s);
 		s.addDiscipline(this);
 	}
 	

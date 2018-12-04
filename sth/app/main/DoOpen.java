@@ -41,7 +41,8 @@ public class DoOpen extends Command<SchoolManager> {
 	  String _serial = _nameFile.value();
     try (ObjectInputStream obj = new ObjectInputStream(new FileInputStream(_serial)))
     {
-      _receiver.updateSchool( (School) obj.readObject() );
+    	_receiver.setSerialFile(_serial);
+    	_receiver.updateSchool( (School) obj.readObject() );
     }
     catch (FileNotFoundException fnfe) {
 		_display.popup(Message.fileNotFound());

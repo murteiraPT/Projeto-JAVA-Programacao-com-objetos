@@ -8,7 +8,7 @@ public class Course implements java.io.Serializable {
 	private String _name;
 	private int _numberOfRepresentatives;
 	private HashMap<String, Discipline> _disciplineMap;
-	private HashMap<String, Student> _studentMap;
+	private HashMap<Integer, Student> _studentMap;
 
 	public Course(String name){
 		_numberOfRepresentatives = 0;
@@ -25,8 +25,12 @@ public class Course implements java.io.Serializable {
 		return _disciplineMap.get(name);
 	}
 	
-	Student getCourse(String name) {
-		return _studentMap.get(name);
+	Student getStudent(String name) {
+		for(Student s : _studentMap.values()) {
+			if(s.getName().equals(name))
+				return s;
+		}
+		return null;
 	}
 	
 	
@@ -41,15 +45,15 @@ public class Course implements java.io.Serializable {
 	}
 	
 	void addStudent(Student student) throws BadEntryException {
-		if(_studentMap.containsKey(student.getName()))
+		if(_studentMap.containsKey(student.getId()))
 			throw new BadEntryException("Student already exists");
-		_studentMap.put(student.getName(), student);
+		_studentMap.put(student.getId(), student);
 	}
 	
 	void addRepresentative(Student student) throws NumberOfDelegatesExceed, BadEntryException{
 		if(_numberOfRepresentatives > 7)
 			throw new NumberOfDelegatesExceed(_name);
-		if(!_studentMap.containsKey(student.getName()))
+		if(!_studentMap.containsKey(student.getId()))
 			throw new BadEntryException("Student out of course");
 		student.setRepresentative(true);
 		_numberOfRepresentatives ++;
@@ -62,5 +66,15 @@ public class Course implements java.io.Serializable {
         	return discipline;
     	}
     	return _disciplineMap.get(name);
-    }	
+    }
+	
+	
+	public List<Discipline> getSortedDisciplineList() {
+		
+		List<Discipline> listDiscipline = new ArrayList<>(_disciplineMap.values());
+		
+		Collections.sort(listDiscipline, Comparator.comparing(Discipline::getName));
+		
+		return listDiscipline;
+	}
 }

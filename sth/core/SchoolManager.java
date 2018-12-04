@@ -10,7 +10,6 @@ import sth.core.exception.DuplicateIdProjectException;
 
 import java.util.*;
 import java.io.IOException;
-import java.util.HashMap;
 import java.io.FileNotFoundException;
 
 
@@ -127,17 +126,14 @@ public class SchoolManager {
   }
   
   public String showAllUsers() {
-	  HashMap<Integer, Person> unsortMap = _school.getAllUsers();
+	  List<Person> listPersons = new ArrayList<>();
+	  
+	  listPersons.addAll(_school.getAllUsers().values());
+	  Collections.sort(listPersons, Comparator.comparing(Person::getId));
+	  
 	  String text ="";
-	  Map<Integer, Person> treeMap = new TreeMap<Integer, Person>(
-              new Comparator<Integer>() {
-                  @Override
-                  public int compare(Integer o1, Integer o2) {
-                      return o1.compareTo(o2);
-                  }
-              });
-	  treeMap.putAll(unsortMap);
-	  for(Person p : treeMap.values()) {
+	  
+	  for(Person p : listPersons) {
 		  text += p.toString();
 	  }
 	  return text;
@@ -152,12 +148,14 @@ public class SchoolManager {
   
   public String searchPerson(String name) {
 	  
-	  HashMap<Integer, Person> personMap = getAllUsers();
+	  List<Person> personMap = new ArrayList<>(_school.getAllUsers().values());
 	  String s ="";
 	  
-	  for (HashMap.Entry<Integer, Person> entry : personMap.entrySet()) {
-		  if(entry.getValue().getName().contains(name))
-			  s += entry.getValue().toString();
+	  Collections.sort(personMap, Comparator.comparing(Person::getName));
+	  
+	  for (Person entry : personMap) {
+		  if(entry.getName().contains(name))
+			  s += entry.toString();
 	  }
 	  
 	  return s;
@@ -181,7 +179,7 @@ public class SchoolManager {
   
   public String doShowDisciplineStudents(String nameDiscipline) throws NoSuchDisciplineIdException, NoSuchDisciplineException{
 	  HashMap<String, Course> courseMap = _school.getCourseMap();
-	  HashMap<String, Student> studentMap;
+	  HashMap<Integer, Student> studentMap;
 	  
 	  String text = "";
 	  
@@ -190,8 +188,12 @@ public class SchoolManager {
 		  for(Course c : courseMap.values()) {
 			  if(c.getDiscipline(nameDiscipline)!= null) {
 				  studentMap = c.getDiscipline(nameDiscipline).getStudentMap();
+				
+			      TreeMap<Integer, Student> sorted = new TreeMap<>(); 
+			  
+			      sorted.putAll(studentMap); 
 				  
-				  for(Student s : studentMap.values()) {
+				  for(Student s : sorted.values()) {
 					  text += s.toString();
 				  }
 				  break;
@@ -199,8 +201,6 @@ public class SchoolManager {
 		  }
 	  }
 	  
-	  if(text=="")
-		  throw new NoSuchDisciplineException(nameDiscipline);
 	  
 	  return text;
   }
