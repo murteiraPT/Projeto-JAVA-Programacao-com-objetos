@@ -82,9 +82,17 @@ public class Teacher extends Person{
 	
 	
 	HashMap<Integer, Student> getStudentsOfDiscipline(Discipline discipline) throws NoSuchDisciplineIdException{
-		if(!_disciplineList.contains(discipline.getName()))	
+		if(!_disciplineList.contains(discipline))	
 			throw new NoSuchDisciplineIdException("Discipline does not exists");
 		return discipline.getStudentMap();
+	}
+
+	HashMap<Student, Submission> getProjectSubmissions(Discipline discipline, String nameProject) throws NoSuchDisciplineIdException{
+		if(!_disciplineList.contains(discipline))
+			throw new NoSuchDisciplineIdException("Discipline does not exists");
+		else {
+			return discipline.getProject(nameProject).getSubmissions();
+		}
 	}
 	
 }

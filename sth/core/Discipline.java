@@ -51,7 +51,11 @@ public class Discipline implements java.io.Serializable {
 	
 	HashMap<Integer, Student> getStudentMap () {
 		return _studentMap;
-	} 
+	}
+
+	HashMap<String, Project> getProjectMap () {
+		return _projectMap;
+	}
 	
 	void addTeacher(Teacher t) {
 		_teacherMap.put(t.getName(), t);
@@ -86,7 +90,7 @@ public class Discipline implements java.io.Serializable {
 		    }
 		}
 		
-		throw new NoSuchProjectIdException(name);
+		throw new NoSuchProjectIdException(this.getName(),name);
 		
 	}
 	

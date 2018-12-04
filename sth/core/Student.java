@@ -35,6 +35,17 @@ public class Student extends Person implements java.io.Serializable{
 		return _course;
 	}
 
+	Discipline getDiscipline(String nameDisc) throws NoSuchDisciplineIdException{
+		for (Map.Entry<String, Discipline> entry : _disciplineMap.entrySet()) {
+			Discipline value = entry.getValue();
+		    
+		    if(value.getName().equals(nameDisc))
+		    	return value;
+		}
+		
+		throw new NoSuchDisciplineIdException(nameDisc);
+	}
+
 	void addDiscipline (Discipline d){
 		_disciplineMap.put(d.getName(), d);
 	}
@@ -69,35 +80,95 @@ public class Student extends Person implements java.io.Serializable{
 		return text;
 	}
 	
-	/*
-	protected void submitAnswerToSurvey(String nameDiscipline, Project proj) throws NoSuchDisciplineIdException
-	{
-		private int numberHours = proj.requestProjectHours();
-		private String comment = proj.requestComment();
-
-
-		for(Discipline d : _listDisciplinas)
-		{
-			if(d.getName().equals(nameDiscipline))
-			{
-				//...
-			}
-
-		}
-		throw new NoSuchDisciplineIdException("Invalido com o nome da disciplina");
-
-
+	
+	public void submitProject(String nameDiscipline, String nameProject, String text) throws NoSuchDisciplineIdException, NoSuchProjectIdException {
+		  Discipline discipline;
+		  Project project;
+		  
+		  if((discipline = this.getDiscipline(nameDiscipline))!=null) 
+		  {
+			  project = discipline.getProject(nameProject);
+			  
+			  if( project.getStatus() == false )
+				  throw new NoSuchProjectIdException(nameDiscipline, nameProject);
+			  else
+				  project.addSubmission(this, text);
+		  }
+		  else
+			  throw new NoSuchDisciplineIdException(nameDiscipline);
 	}
-
-	protected void submitProject(String nameDiscipline, Project proj){
-
-		private String text = proj.requestDeliveryMessage();
-
-		proj.addSubmission(this, text);   //addSubmission(Student s, String message)
-	}*/
-
-
-
-
+	
+	//funcionalidades do delegado
+	
+	public void createSurvey(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, NoSuchProjectIdException {
+		
+		Discipline discipline;
+		Project project;
+		
+		if((discipline = this.getDiscipline(nameDiscipline))==null)
+			throw new NoSuchDisciplineIdException(nameDiscipline);
+		
+		if(((project = discipline.getProject(nameProject))==null)||(project.getStatus()==false))
+			throw new NoSuchProjectIdException(nameDiscipline, nameProject);
+		
+		project.addSurvey();
+		 
+	}
+	
+	public void cancelSurvey(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, NoSuchProjectIdException,
+																NoSurveyIdException,NonEmptySurveyIdException, SurveyFinishedIdException {
+		Discipline discipline;
+		Project project;
+		
+		if((discipline = this.getDiscipline(nameDiscipline))==null)
+			throw new NoSuchDisciplineIdException(nameDiscipline);
+		
+		if((project = discipline.getProject(nameProject))==null)
+			throw new NoSuchProjectIdException(nameDiscipline, nameProject);
+		
+		project.cancelSurvey(nameDiscipline);
+	}
+	
+	public void openSurvey(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, NoSuchProjectIdException,
+																					NoSurveyIdException, OpeningSurveyIdException {
+		Discipline discipline;
+		Project project;
+		
+		if((discipline = this.getDiscipline(nameDiscipline))==null)
+			throw new NoSuchDisciplineIdException(nameDiscipline);
+		
+		if((project = discipline.getProject(nameProject))==null)
+			throw new NoSuchProjectIdException(nameDiscipline, nameProject);
+		
+		project.openSurvey(nameDiscipline);
+	}
+	
+	public void closeSurvey(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, NoSuchProjectIdException,
+																					NoSurveyIdException, ClosingSurveyIdException {
+		Discipline discipline;
+		Project project;
+		
+		if((discipline = this.getDiscipline(nameDiscipline))==null)
+			throw new NoSuchDisciplineIdException(nameDiscipline);
+		
+		if((project = discipline.getProject(nameProject))==null)
+			throw new NoSuchProjectIdException(nameDiscipline, nameProject);
+		
+		project.closeSurvey(nameDiscipline);
+	}
+	
+	public void finishSurvey(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, NoSuchProjectIdException,
+																					NoSurveyIdException, FinishingSurveyIdException {
+		Discipline discipline;
+		Project project;
+		
+		if((discipline = this.getDiscipline(nameDiscipline))==null)
+			throw new NoSuchDisciplineIdException(nameDiscipline);
+		
+		if((project = discipline.getProject(nameProject))==null)
+			throw new NoSuchProjectIdException(nameDiscipline, nameProject);
+		
+		project.finishSurvey(nameDiscipline);
+	}
 
 }

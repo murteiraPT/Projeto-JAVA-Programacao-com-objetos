@@ -5,3 +5,9 @@
 /NoSuchProjectIdException.class
 /NumberOfDelegatesExceed.class
 /DuplicateIdProjectException.class
+/ClosingSurveyIdException.class
+/FinishingSurveyIdException.class
+/NoSurveyIdException.class
+/NonEmptySurveyIdException.class
+/OpeningSurveyIdException.class
+/SurveyFinishedIdException.class

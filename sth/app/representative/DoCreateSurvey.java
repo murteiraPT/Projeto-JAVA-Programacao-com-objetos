@@ -1,7 +1,8 @@
 package sth.app.representative;
 
 import pt.tecnico.po.ui.DialogException;
-import pt.tecnico.po.ui.Input;
+import sth.app.exception.NoSuchDisciplineException;
+import sth.app.exception.NoSuchProjectException;
 import sth.core.SchoolManager;
 
 import sth.core.exception.NoSuchDisciplineIdException;
@@ -22,8 +23,21 @@ public class DoCreateSurvey extends sth.app.common.ProjectCommand {
 
   /** @see sth.app.common.ProjectCommand#myExecute() */ 
   @Override
-  public final void myExecute() throws DialogException, NoSuchDisciplineIdException, NoSuchProjectIdException {
-    //FIXME implement command
+  public final void myExecute() throws DialogException {
+	  String disciplineName = _discipline.value();
+	  String projectName = _project.value();
+	  
+	  try {
+	  _receiver.doCreateSurvey(disciplineName, projectName);
+	  }
+	  catch(NoSuchDisciplineIdException e)
+	  {
+		  throw new NoSuchDisciplineException(e.getId());
+	  }
+	  catch(NoSuchProjectIdException e)
+	  {
+		  throw new NoSuchProjectException(e.getIdDiscipline(),e.getIdProject());
+	  }
   }
 
 }

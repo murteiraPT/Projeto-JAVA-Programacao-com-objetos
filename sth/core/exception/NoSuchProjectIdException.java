@@ -7,18 +7,24 @@ public class NoSuchProjectIdException extends Exception {
   private static final long serialVersionUID = 201809021324L;
 
   /** Person id. */
-  private String _id;
+  private String _idProject;
+  private String _idDiscipline;
 
   /**
    * @param id
    */
-  public NoSuchProjectIdException(String id) {
-    _id = id;
+  public NoSuchProjectIdException(String idProject , String idDiscipline) {
+	_idProject = idProject;
+    _idDiscipline = idDiscipline;
   }
 
   /** @return id */
-  public String getId() {
-    return _id;
+  public String getIdProject() {
+    return _idProject;
+  }
+  
+  public String getIdDiscipline() {
+	    return _idDiscipline;
   }
 
 }

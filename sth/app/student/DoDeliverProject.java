@@ -13,24 +13,24 @@ import sth.core.exception.NoSuchDisciplineIdException;
  */
 public class DoDeliverProject extends sth.app.common.ProjectCommand {
 
-	/*String _nameDiscipline;
-	String _nameProject;
-	String _text;*/
+	private Input<String> _text;
 
 	/**
 	 * @param receiver
 	 */
 	public DoDeliverProject(SchoolManager receiver) {
 		super(Label.DELIVER_PROJECT, receiver);
-	    /*_nameDiscipline = _form.addStringInput(Message.requestDisciplineName());
-	    _nameProject = _form.addStringInput(Message.requestProjectName());
-	    _text = _form.addStringInput(Message.requestDeliveryMessage());*/
+	    _text = _form.addStringInput(Message.requestDeliveryMessage());
 	}
 
 	/** @see pt.tecnico.po.ui.Command#execute() */
 	@Override
 	public final void myExecute() throws NoSuchProjectIdException, NoSuchDisciplineIdException, DialogException {
-		//_receiver.doDeliverProject(_nameDiscipline, _nameProject, _text);
+		
+		String disciplineName = _discipline.value();
+		String projectName = _project.value();
+		
+		_receiver.doDeliverProject(disciplineName, projectName, _text.value());
 	}
 
 }

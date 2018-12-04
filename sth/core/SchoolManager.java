@@ -1,16 +1,21 @@
 package sth.core;
 
-import sth.app.exception.NoSuchDisciplineException;
 import sth.core.exception.BadEntryException;
+import sth.core.exception.ClosingSurveyIdException;
 import sth.core.exception.ImportFileException;
 import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.NoSuchPersonIdException;
 import sth.core.exception.NoSuchProjectIdException;
+import sth.core.exception.NoSurveyIdException;
+import sth.core.exception.NonEmptySurveyIdException;
+import sth.core.exception.OpeningSurveyIdException;
+import sth.core.exception.SurveyFinishedIdException;
 import sth.core.exception.DuplicateIdProjectException;
+import sth.core.exception.FinishingSurveyIdException;
 
 import java.util.*;
+import java.util.HashMap;
 import java.io.IOException;
-import java.io.FileNotFoundException;
 
 
 //FIXME import other classes if needed
@@ -177,7 +182,7 @@ public class SchoolManager {
 	  }
   }	
   
-  public String doShowDisciplineStudents(String nameDiscipline) throws NoSuchDisciplineIdException, NoSuchDisciplineException{
+  public String doShowDisciplineStudents(String nameDiscipline) throws NoSuchDisciplineIdException{
 	  HashMap<String, Course> courseMap = _school.getCourseMap();
 	  HashMap<Integer, Student> studentMap;
 	  
@@ -205,14 +210,74 @@ public class SchoolManager {
 	  return text;
   }
   
-  /*public void doDeliverProject(String nameDiscipline, String nameProject, String text) {
-	  	  
+public void doDeliverProject(String nameDiscipline, String nameProject, String text) throws NoSuchDisciplineIdException, NoSuchProjectIdException {
+	  if(isLoggedUserStudent())
+		 ((Student) _loggedInUser).submitProject(nameDiscipline, nameProject, text);
   }
   
-  public void doShowProjectSubmissions(String nameDiscipline, String nameProject) {
+  public String doShowProjectSubmissions(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, NoSuchProjectIdException{
 	  
-  }*/
+	  String text = "" + nameDiscipline + " - " + nameProject + "\n";
+	  Discipline discipline;
+	  HashMap<Student,Submission> listSubmissions;
+	  
+	  if((discipline = ((Teacher)_loggedInUser).getDiscipline(nameDiscipline))!=null)
+	  {
+		  listSubmissions = ((Teacher) _loggedInUser).getProjectSubmissions(discipline, nameProject);
+		  
+		  for(Submission s : listSubmissions.values())
+			  text += s.toString();
+		  
+		  return text;
+	  }
+	  else
+		  throw new NoSuchDisciplineIdException(nameDiscipline);
+  }
   
+  public void doCreateSurvey(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, NoSuchProjectIdException {
+	  if(isLoggedUserRepresentative())
+		 ((Student) _loggedInUser).createSurvey(nameDiscipline, nameProject);
+  }
   
-
+  public void doCancelSurvey(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, NoSuchProjectIdException,
+  																NoSurveyIdException, NonEmptySurveyIdException, SurveyFinishedIdException {
+	  if(isLoggedUserRepresentative())
+		 ((Student) _loggedInUser).cancelSurvey(nameDiscipline, nameProject);
+  }
+  
+  public void doOpenSurvey(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, NoSuchProjectIdException,
+  																					NoSurveyIdException, OpeningSurveyIdException {
+	  if(isLoggedUserRepresentative())
+		 ((Student) _loggedInUser).openSurvey(nameDiscipline, nameProject);
+  }
+  
+  public void doCloseSurvey(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, NoSuchProjectIdException,
+																					NoSurveyIdException, ClosingSurveyIdException {
+	if(isLoggedUserRepresentative())
+		((Student) _loggedInUser).closeSurvey(nameDiscipline, nameProject);
+  }
+  
+  public void doFinishSurvey(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, NoSuchProjectIdException,
+																					NoSurveyIdException, FinishingSurveyIdException {
+	if(isLoggedUserRepresentative())
+		((Student) _loggedInUser).finishSurvey(nameDiscipline, nameProject);
+  }
+  
+  public String doShowSurveysDiscipline(String nameDiscipline) throws NoSuchDisciplineIdException{
+	/*  String text = "";
+	  Discipline discipline;
+	  HashMap<String, Project> _projectMap;
+	  
+	  if(isLoggedUserRepresentative()) {
+		  if((discipline = ((Student) _loggedInUser).getDiscipline(nameDiscipline)) == null);
+			  throw new NoSuchDisciplineIdException(nameDiscipline);
+			  
+		  _projectMap = discipline.getProjectMap();
+		  
+		  for(Project p : _projectMap.values())
+			  text += p.toStringSurvey(discipline);
+		  
+	  }*/
+	return "";
+  }
 }

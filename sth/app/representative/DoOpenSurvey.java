@@ -1,10 +1,16 @@
 package sth.app.representative;
 
 import pt.tecnico.po.ui.DialogException;
-import pt.tecnico.po.ui.Input;
+
+import sth.app.exception.NoSuchDisciplineException;
+import sth.app.exception.NoSuchProjectException;
+import sth.app.exception.NoSurveyException;
+import sth.app.exception.OpeningSurveyException;
 import sth.core.SchoolManager;
 
 import sth.core.exception.NoSuchProjectIdException;
+import sth.core.exception.NoSurveyIdException;
+import sth.core.exception.OpeningSurveyIdException;
 import sth.core.exception.NoSuchDisciplineIdException;
 
 /**
@@ -17,13 +23,33 @@ public class DoOpenSurvey extends sth.app.common.ProjectCommand {
    */
   public DoOpenSurvey(SchoolManager receiver) {
     super(Label.OPEN_SURVEY, receiver);
-    //FIXME initialize input fields if needed
   }
 
   /** @see sth.app.common.ProjectCommand#myExecute() */ 
   @Override
-  public final void myExecute() throws DialogException, NoSuchDisciplineIdException, NoSuchProjectIdException {
-    //FIXME implement command
+  public final void myExecute() throws DialogException {
+	  String disciplineName = _discipline.value();
+	  String projectName = _project.value();
+	  
+	  try {
+	  _receiver.doOpenSurvey(disciplineName, projectName);
+	  }
+	  catch(NoSuchDisciplineIdException e)
+	  {
+		  throw new NoSuchDisciplineException(e.getId());
+	  }
+	  catch(NoSuchProjectIdException e)
+	  {
+		  throw new NoSuchProjectException(e.getIdDiscipline(),e.getIdProject());
+	  }
+	  catch(NoSurveyIdException e)
+	  {
+		  throw new NoSurveyException(e.getDiscipline(),e.getProject());
+	  }
+	  catch(OpeningSurveyIdException e)
+	  {
+		  throw new OpeningSurveyException(e.getDiscipline(),e.getProject());
+	  }
   }
 
 }
