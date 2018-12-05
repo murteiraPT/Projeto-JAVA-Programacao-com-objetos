@@ -51,7 +51,7 @@ public class Discipline implements java.io.Serializable {
 	
 	HashMap<Integer, Student> getStudentMap () {
 		return _studentMap;
-	}
+	}	
 
 	HashMap<String, Project> getProjectMap () {
 		return _projectMap;
@@ -69,14 +69,12 @@ public class Discipline implements java.io.Serializable {
 	
 	void createProject(String name, String description) throws DuplicateIdProjectException{
 		
-		for (Map.Entry<String, Project> entry : _projectMap.entrySet()) {
-		    Project value = entry.getValue();
-		    
-		    if(value.getName().equals(name))
+		for (Project p : _projectMap.values()) {
+		    if(p.getName().equals(name))
 		    	throw new DuplicateIdProjectException(_name,name);
 		}
 		
-		final Project p = new Project(name, description);
+		Project p = new Project(name, description,this);
 		_projectMap.put(name, p);
 	}	
 	

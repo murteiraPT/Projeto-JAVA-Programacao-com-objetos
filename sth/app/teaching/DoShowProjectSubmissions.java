@@ -22,7 +22,7 @@ public class DoShowProjectSubmissions extends sth.app.common.ProjectCommand {
 		
 		String disciplineName = _discipline.value();
 		String projectName = _project.value();
-		_form.parse();
+
 		String text = _receiver.doShowProjectSubmissions(disciplineName, projectName);
 		
 		_display.add(text);

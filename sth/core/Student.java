@@ -87,12 +87,10 @@ public class Student extends Person implements java.io.Serializable{
 		  
 		  if((discipline = this.getDiscipline(nameDiscipline))!=null) 
 		  {
-			  project = discipline.getProject(nameProject);
-			  
-			  if( project.getStatus() == false )
-				  throw new NoSuchProjectIdException(nameDiscipline, nameProject);
+			  if(((project = discipline.getProject(nameProject)) != null)&&(project.getStatus() == true))
+					  project.addSubmission(this, text);
 			  else
-				  project.addSubmission(this, text);
+				  throw new NoSuchProjectIdException(nameDiscipline, nameProject);  
 		  }
 		  else
 			  throw new NoSuchDisciplineIdException(nameDiscipline);
