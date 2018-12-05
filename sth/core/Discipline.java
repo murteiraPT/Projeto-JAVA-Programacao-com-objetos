@@ -76,7 +76,7 @@ public class Discipline implements java.io.Serializable {
 		    	throw new DuplicateIdProjectException(_name,name);
 		}
 		
-		final Project p = new Project(name, description);
+		final Project p = new Project(name, description, this);
 		_projectMap.put(name, p);
 	}	
 	
@@ -91,9 +91,14 @@ public class Discipline implements java.io.Serializable {
 		}
 		
 		throw new NoSuchProjectIdException(this.getName(),name);
-		
 	}
-	
-	
-	
+
+	void sendAllNotification(Notifiction n){
+		for(Student s : _studentMap.values()){
+			s.receiveNotification(n);
+		}
+		for(Teacher t : _teacherMap.values()){
+			t.receiveNotification(n);
+		}
+	}
 }

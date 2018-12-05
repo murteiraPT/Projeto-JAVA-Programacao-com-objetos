@@ -13,14 +13,16 @@ import sth.core.exception.SurveyFinishedIdException;
 public class Project implements java.io.Serializable{
 	private String _name;
 	private String _description;
+	private Discipline _discipline;
 	private Boolean _isOpen;
 	private Survey _survey;
 	private HashMap<Student, Submission> _submissionMap;
 	
-	public Project(String name, String description) {
+	public Project(String name, String description, Discipline discipline) {
 		_name = name;
 		_description = description;
 		_isOpen = true;
+		_discipline = discipline;
 	}
 	
 	public String getName() {
@@ -117,6 +119,10 @@ public class Project implements java.io.Serializable{
 			return;
 		else
 			throw new FinishingSurveyIdException(nameDiscipline,this.getName());
+	}
+
+	Discipline getDiscipline(){
+		return _discipline;
 	}	
 }
 

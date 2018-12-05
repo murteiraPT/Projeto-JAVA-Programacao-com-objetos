@@ -80,6 +80,7 @@ public class SchoolManager {
     if (_school.getPerson(id)==null)
     	throw new NoSuchPersonIdException(id);
     _loggedInUser = _school.getPerson(id);
+
   }
 
   /**
@@ -142,6 +143,16 @@ public class SchoolManager {
 		  text += p.toString();
 	  }
 	  return text;
+  }
+
+  public String showAllNotifications(){
+  	String t ="";
+  	if (_loggedInUser.hasNotifications()) {
+  		for(Notification n : _loggedInUser.getNotificationList())
+  			t += n.getMessage();
+  		_loggedInUser.clearNotifications()
+  	}
+  	return t;
   }
     
   public String setPhoneNr(int phone) {

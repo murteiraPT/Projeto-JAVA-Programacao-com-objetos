@@ -7,11 +7,15 @@ public class Person implements java.io.Serializable {
 	private int _id;
 	private String _name;
 	private int _phoneNumber;
+	private boolean _hasNotifications;
+	private ArrayList<Notification> _notificationsList;
 
 	public Person(int nextPersonID, int phone, String name){
 		_id = nextPersonID;
 		_name = name;
 		_phoneNumber = phone;
+		_hasNotifications = False;
+		_notificationsList = new ArrayList<>;
 	}
 
 	int getId(){
@@ -31,12 +35,25 @@ public class Person implements java.io.Serializable {
 	
 	void parseContext(String context, School school) throws BadEntryException {
 	    throw new BadEntryException("Should not have extra context: " + context);
-	  }
-	/*
-	@Override
-	public String toString(){
-		return getPersonType() + '|' + _id + '|' + getPhone() + '|' + getName();
-	}*/
+	}
+
+	Boolean hasNotifications(){
+		return _hasNotifications;
+	}
+
+	ArrayList<Notification> getNotificationList(){
+		return _notificationsList;
+	}
+
+	void receiveNotification(Norification n){
+		_notificationsList.add(n);
+		_hasNotifications = true;
+	}
+
+	void clearNotifications(){
+		_notifications.clear();
+		_hasNotifications = false;
+	}
 
 }
 
