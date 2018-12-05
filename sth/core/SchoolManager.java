@@ -230,13 +230,17 @@ public void doDeliverProject(String nameDiscipline, String nameProject, String t
 	  
 	  String text = "" + nameDiscipline + " - " + nameProject + "\n";
 	  Discipline discipline;
-	  HashMap<Student,Submission> listSubmissions;
+	  HashMap<Integer,Submission> listSubmissions;
 	  
 	  if((discipline = ((Teacher)_loggedInUser).getDiscipline(nameDiscipline))!=null)
 	  {
 		  listSubmissions = ((Teacher) _loggedInUser).getProjectSubmissions(discipline, nameProject);
 		  
-		  for(Submission s : listSubmissions.values())
+		  TreeMap<Integer, Submission> sorted = new TreeMap<>(); 
+		  
+	      sorted.putAll(listSubmissions); 
+		  
+		  for(Submission s : sorted.values())
 			  text += s.toString();
 		  
 		  return text;

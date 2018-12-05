@@ -1,0 +1,29 @@
+*** tests/A-10-50-M-ok.out	2018-11-30 13:08:27.000000000 +0000
+--- tests/A-10-50-M-ok.outhyp	2018-12-05 17:54:07.825236601 +0000
+***************
+*** 20,26 ****
+  5 - Finalizar inquérito
+  6 - Mostrar inquéritos de uma disciplina
+  0 - Sair
+! Escolha uma opção: Nome da disciplina: Portal do Delegado
+  1 - Criar inquérito
+  2 - Cancelar inquérito
+  3 - Abrir inquérito
+--- 20,26 ----
+  5 - Finalizar inquérito
+  6 - Mostrar inquéritos de uma disciplina
+  0 - Sair
+! Escolha uma opção: Portal do Delegado
+  1 - Criar inquérito
+  2 - Cancelar inquérito
+  3 - Abrir inquérito
+***************
+*** 28,33 ****
+--- 28,34 ----
+  5 - Finalizar inquérito
+  6 - Mostrar inquéritos de uma disciplina
+  0 - Sair
++ Escolha uma opção: Número inválido!
+  Escolha uma opção: Menu principal
+  1 - Abrir
+  2 - Guardar

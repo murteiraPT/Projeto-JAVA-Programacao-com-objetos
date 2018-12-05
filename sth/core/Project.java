@@ -16,13 +16,15 @@ public class Project implements java.io.Serializable{
 	private Discipline _discipline;
 	private Boolean _isOpen;
 	private Survey _survey;
-	private HashMap<Student, Submission> _submissionMap;
+	private Discipline _discipline;
+	private HashMap<Integer, Submission> _submissionMap;
 	
 	public Project(String name, String description, Discipline discipline) {
 		_name = name;
 		_description = description;
 		_isOpen = true;
 		_discipline = discipline;
+		_submissionMap = new HashMap<>();
 	}
 	
 	public String getName() {
@@ -40,18 +42,21 @@ public class Project implements java.io.Serializable{
 	Survey getSurvey() {
 		return _survey;
 	}
+	
+	Discipline getDiscipline() {
+		return _discipline;
+	}
 
 	void setDescription(String description) {
 		_description = description;
 	}
 
 	void addSubmission(Student s, String message) {
-		
-		final Submission sub = new Submission(s.getId(),message);
-		_submissionMap.put(s, sub);
+		Submission sub = new Submission(s.getId(),message);
+		_submissionMap.put(s.getId(), sub);
 	}
 	
-	HashMap<Student, Submission> getSubmissions(){
+	HashMap<Integer, Submission> getSubmissions(){
 		return _submissionMap;
 	}
 	

@@ -13,7 +13,7 @@ public class NoSuchProjectIdException extends Exception {
   /**
    * @param id
    */
-  public NoSuchProjectIdException(String idProject , String idDiscipline) {
+  public NoSuchProjectIdException(String idDiscipline , String idProject) {
 	_idProject = idProject;
     _idDiscipline = idDiscipline;
   }
