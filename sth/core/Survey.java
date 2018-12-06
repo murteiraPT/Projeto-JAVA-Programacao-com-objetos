@@ -11,19 +11,13 @@ import java.util.Set;
 
 public class Survey implements java.io.Serializable{
 	
-	enum Condition{
-		CRIADO, ABERTO, FECHADO, FINALIZADO;
-	}
-	
 	private Set<Answer> _answerMap;
 	private ArrayList<Student> _studentMap;
 	private Project _project;
-	
-	
-	Condition _condition;
+	private Condition _condition;
 	
 	public Survey(Project project){
-		this._condition = Condition.CRIADO;
+		_condition = Criado.instancia();
 		_answerMap = new HashSet<>();
 		_studentMap = new ArrayList<>();
 		_project = project;
@@ -36,19 +30,26 @@ public class Survey implements java.io.Serializable{
 	Set<Answer> getAnswerMap(){
 		return _answerMap;
 	}
+	void transporte(Condition condition) {
+		_condition=condition;
+	}
+	
+	public String getState() {
+		return _condition.toString();
+	}
 	
 	public void open(){
-		_condition = Condition.ABERTO;
+		_condition.open(this);
 		Notification n = new Notification("Aberto", _project, _project.getDiscipline());
 		_project.getDiscipline().sendAllNotification(n);
 	}
 	
 	public void close(){
-		this._condition = Condition.FECHADO;
+		_condition.close(this);
 	}
 	
 	public void finalize(){
-		this._condition = Condition.FINALIZADO;
+		_condition.finalize(this);
 		Notification n = new Notification("Finalizado", _project, _project.getDiscipline());
 		_project.getDiscipline().sendAllNotification(n);
 	}
@@ -72,7 +73,7 @@ public class Survey implements java.io.Serializable{
 		int sum = 0;
 		int number = _answerMap.size();
 		
-		if(_condition == Condition.FINALIZADO) {
+		if(_condition.toString().equals("Finalizado")) {
 			for(Answer a : _answerMap)
 				sum += a.getHours();
 			

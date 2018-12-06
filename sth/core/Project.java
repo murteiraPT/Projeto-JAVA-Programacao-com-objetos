@@ -70,8 +70,7 @@ public class Project implements java.io.Serializable{
 		
 		if(_survey == null)
 			throw new NoSurveyIdException(nameDiscipline,this.getName());
-		if((_survey._condition == Condition.ABERTO)||(_survey._condition == Condition.CRIADO))
-		{
+		if((_survey.getState().equals("Aberto")||(_survey.getState().equals("Criado")))){
 			if(_survey.isEmptyAnswer())
 				_survey = null;
 			else
@@ -79,11 +78,11 @@ public class Project implements java.io.Serializable{
 		}
 		else
 		{
-			if(_survey._condition == Condition.FECHADO)
+			if(_survey.getState().equals("Fechado"))
 				_survey.open();
 			else
 			{
-				if(_survey._condition == Condition.FINALIZADO)
+				if(_survey.getState().equals("Finalizado"))
 					throw new SurveyFinishedIdException(nameDiscipline,this.getName());	
 			}
 		}
@@ -94,7 +93,7 @@ public class Project implements java.io.Serializable{
 		if(_survey == null)
 			throw new NoSurveyIdException(nameDiscipline,this.getName());
 		
-		if(((!this.getStatus())&&(_survey._condition== Condition.CRIADO)) || (_survey._condition== Condition.FECHADO))
+		if(((!this.getStatus())&&(_survey.getState().equals("Criado"))) || (_survey.getState().equals("Fechado")))
 			_survey.open();
 		else
 			throw new OpeningSurveyIdException(nameDiscipline,this.getName());
@@ -105,10 +104,10 @@ public class Project implements java.io.Serializable{
 		if(_survey == null)
 			throw new NoSurveyIdException(nameDiscipline,this.getName());
 		
-		if(_survey._condition == Condition.ABERTO)
+		if(_survey.getState().equals("Aberto"))
 			_survey.close();
 		
-		if(_survey._condition == Condition.FECHADO)
+		if(_survey.getState().equals("Fechado"))
 			return;
 		else
 			throw new ClosingSurveyIdException(nameDiscipline,this.getName());
@@ -119,17 +118,17 @@ public class Project implements java.io.Serializable{
 		if(_survey == null)
 			throw new NoSurveyIdException(nameDiscipline,this.getName());
 		
-		if(_survey._condition == Condition.FECHADO)
+		if(_survey.getState().equals("Fechado"))
 			_survey.close();
 		
-		if(_survey._condition == Condition.FINALIZADO)
+		if(_survey.getState().equals("Finalizado"))
 			return;
 		else
 			throw new FinishingSurveyIdException(nameDiscipline,this.getName());
 	}
 	
 	String toStringSurveyState() {
-		return _survey._condition.name();
+		return _survey.getState();
 	}
 	
 	Set<Answer> getAnswerMap(){
