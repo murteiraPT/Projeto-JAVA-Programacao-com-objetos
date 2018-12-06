@@ -12,11 +12,13 @@ public class Notification{
 	}
 
 	public String getMessage(){
+		String nomep = _project.getName();
+		String nomed = _discipline.getName();
+		String s;
 		if(_message == "Aberto")
-			String s = "Pode preencher inquérito do projeto " + _project.getName() + " da disciplina " + _discipline.getName();
+			s = "Pode preencher inquérito do projeto " + nomep + " da disciplina " + nomed;
 		else
-
-			String s = "Resultados do inquérito do projeto " + _project.getName() + " da disciplina " + _discipline.getName();
+			s = "Resultados do inquérito do projeto " + nomep + " da disciplina " + nomed;
 		return s;
 	}
 }

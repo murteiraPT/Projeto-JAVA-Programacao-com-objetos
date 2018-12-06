@@ -1,6 +1,7 @@
 package sth.core;
 
 import sth.core.exception.BadEntryException;
+import java.util.*;
 
 public class Person implements java.io.Serializable {
 
@@ -14,8 +15,8 @@ public class Person implements java.io.Serializable {
 		_id = nextPersonID;
 		_name = name;
 		_phoneNumber = phone;
-		_hasNotifications = False;
-		_notificationsList = new ArrayList<>;
+		_hasNotifications = false;
+		_notificationsList = new ArrayList<>();
 	}
 
 	int getId(){
@@ -45,13 +46,13 @@ public class Person implements java.io.Serializable {
 		return _notificationsList;
 	}
 
-	void receiveNotification(Norification n){
+	void receiveNotification(Notification n){
 		_notificationsList.add(n);
 		_hasNotifications = true;
 	}
 
 	void clearNotifications(){
-		_notifications.clear();
+		_notificationsList.clear();
 		_hasNotifications = false;
 	}
 

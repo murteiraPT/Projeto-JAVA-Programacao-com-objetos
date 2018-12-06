@@ -28,17 +28,15 @@ public class DoLogin extends Command<SchoolManager> {
   public final void execute() throws DialogException {
     _form.parse();
     try {
+      _receiver.login(_login.value());
+    } catch (NoSuchPersonIdException e) {
+      throw new NoSuchPersonException(_login.value());
+    }
     String text = _receiver.showAllNotifications();
-    if(t == ""){}
+    if(text == ""){}
     else{
       _display.add(text);
       _display.display();
-    }
-    _receiver.login(_login.value());
-    }
-    }
-    } catch (NoSuchPersonIdException e) {
-      throw new NoSuchPersonException(_login.value());
     }
   }
 

@@ -1,7 +1,5 @@
 package sth.core;
 
-
-
 public class Submission implements java.io.Serializable{
 	
 	private int _studentId;

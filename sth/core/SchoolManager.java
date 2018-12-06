@@ -150,7 +150,7 @@ public class SchoolManager {
   	if (_loggedInUser.hasNotifications()) {
   		for(Notification n : _loggedInUser.getNotificationList())
   			t += n.getMessage();
-  		_loggedInUser.clearNotifications()
+  		_loggedInUser.clearNotifications();
   	}
   	return t;
   }

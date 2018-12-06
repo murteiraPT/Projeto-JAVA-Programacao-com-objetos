@@ -90,7 +90,7 @@ public class Discipline implements java.io.Serializable {
 		throw new NoSuchProjectIdException(this.getName(),name);
 	}
 
-	void sendAllNotification(Notifiction n){
+	void sendAllNotification(Notification n){
 		for(Student s : _studentMap.values()){
 			s.receiveNotification(n);
 		}

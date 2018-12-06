@@ -12,7 +12,7 @@ public class Survey implements java.io.Serializable{
 	}
 	
 	private HashMap<Integer,String> _answerMap;
-	private ArrayList<Student> _studentMap
+	private ArrayList<Student> _studentMap;
 	private Project _project;
 	
 	
@@ -31,7 +31,7 @@ public class Survey implements java.io.Serializable{
 	
 	public void open(){
 		_condition = Condition.ABERTO;
-		Notification n = new Notification("Aberto");
+		Notification n = new Notification("Aberto", _project, _project.getDiscipline());
 		_project.getDiscipline().sendAllNotification(n);
 	}
 	
@@ -41,7 +41,7 @@ public class Survey implements java.io.Serializable{
 	
 	public void finalize(){
 		this._condition = Condition.FINALIZADO;
-		Notification n = new Notification("Finalizado");
+		Notification n = new Notification("Finalizado", _project, _project.getDiscipline());
 		_project.getDiscipline().sendAllNotification(n);
 	}
 	

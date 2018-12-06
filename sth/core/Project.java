@@ -16,7 +16,6 @@ public class Project implements java.io.Serializable{
 	private Discipline _discipline;
 	private Boolean _isOpen;
 	private Survey _survey;
-	private Discipline _discipline;
 	private HashMap<Integer, Submission> _submissionMap;
 	
 	public Project(String name, String description, Discipline discipline) {
@@ -61,7 +60,7 @@ public class Project implements java.io.Serializable{
 	}
 	
 	void addSurvey() {
-		_survey = new Survey();
+		_survey = new Survey(this);
 	}
 	
 	void cancelSurvey(String nameDiscipline) throws NoSurveyIdException, NonEmptySurveyIdException, SurveyFinishedIdException {
@@ -125,9 +124,6 @@ public class Project implements java.io.Serializable{
 		else
 			throw new FinishingSurveyIdException(nameDiscipline,this.getName());
 	}
-
-	Discipline getDiscipline(){
-		return _discipline;
-	}	
+	
 }
 
