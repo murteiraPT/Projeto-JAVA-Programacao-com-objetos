@@ -1,8 +1,12 @@
 package sth.core;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 
 public class Survey implements java.io.Serializable{
@@ -11,7 +15,7 @@ public class Survey implements java.io.Serializable{
 		CRIADO, ABERTO, FECHADO, FINALIZADO;
 	}
 	
-	private HashMap<Integer,String> _answerMap;
+	private Set<Answer> _answerMap;
 	private ArrayList<Student> _studentMap;
 	private Project _project;
 	
@@ -20,13 +24,17 @@ public class Survey implements java.io.Serializable{
 	
 	public Survey(Project project){
 		this._condition = Condition.CRIADO;
-		_answerMap = new HashMap<>();
+		_answerMap = new HashSet<>();
 		_studentMap = new ArrayList<>();
 		_project = project;
 	}
 	
 	ArrayList<Student> getStudentMap(){
 		return _studentMap;
+	}
+	
+	Set<Answer> getAnswerMap(){
+		return _answerMap;
 	}
 	
 	public void open(){
@@ -49,7 +57,8 @@ public class Survey implements java.io.Serializable{
 		
 		if(!_studentMap.contains(s))
 		{
-			_answerMap.put(numberHours,comment);
+			Answer a = new Answer(comment,numberHours);
+			_answerMap.add(a);
 			_studentMap.add(s);
 		}
 	}
@@ -64,8 +73,8 @@ public class Survey implements java.io.Serializable{
 		int number = _answerMap.size();
 		
 		if(_condition == Condition.FINALIZADO) {
-			for(Map.Entry<Integer,String> entry : _answerMap.entrySet())
-				sum += entry.getKey();
+			for(Answer a : _answerMap)
+				sum += a.getHours();
 			
 			text += " * Número de respostas: " + number + "\n";
 			text += " * Tempo médio (horas): " + sum/number + "\n";
@@ -76,5 +85,34 @@ public class Survey implements java.io.Serializable{
 
 	Project getProject(){
 		return _project;
+	}
+	
+	int getMinTime() {
+		int min = Integer.MAX_VALUE;
+		
+		for(Answer a : _answerMap)
+		{
+			if(min>a.getHours())
+				min = a.getHours();
+		}
+		return min;
+	}
+	
+	int getMaxTime() {
+		int min = Integer.MIN_VALUE;
+		
+		for(Answer a : _answerMap)
+		{
+			if(min<a.getHours())
+				min = a.getHours();
+		}
+		return min;
+	}
+	int getMediumTime() {
+		int sum = 0;
+		
+		for(Answer a : _answerMap)
+			sum += a.getHours();
+		return sum/_answerMap.size();
 	}
 }

@@ -1,35 +1,52 @@
-*** tests/A-10-45-M-ok.out	2018-12-05 18:33:50.296541711 +0000
---- tests/A-10-45-M-ok.outhyp	2018-12-06 10:31:03.875254996 +0000
+*** tests/A-10-45-M-ok.out	2018-12-02 16:46:48.000000000 +0000
+--- tests/A-10-45-M-ok.outhyp	2018-12-06 18:22:10.154323138 +0000
 ***************
-*** 24,39 ****
+*** 24,30 ****
   4 - Ver alunos de disciplina leccionada
   5 - Ver resultados de um inquérito
   0 - Sair
 ! Escolha uma opção: Nome da disciplina: Nome do projecto: D1 - P1 (aberto)
-! Portal do Docente
+  Portal do Docente
   1 - Criar projecto
   2 - Fechar projecto
-  3 - Ver submissões de um projecto
+--- 24,30 ----
+  4 - Ver alunos de disciplina leccionada
+  5 - Ver resultados de um inquérito
+  0 - Sair
+! Escolha uma opção: Nome da disciplina: Nome do projecto: D1 - P1 (por abrir)
+  Portal do Docente
+  1 - Criar projecto
+  2 - Fechar projecto
+***************
+*** 32,55 ****
   4 - Ver alunos de disciplina leccionada
   5 - Ver resultados de um inquérito
   0 - Sair
 ! Escolha uma opção: Nome da disciplina: Nome do projecto: Ver resultados de um inquérito: Operação inválida: O projecto 'P7' da disciplina 'D1' não tem inquérito associado.
 ! Portal do Docente
-  1 - Criar projecto
-  2 - Fechar projecto
-  3 - Ver submissões de um projecto
---- 24,37 ----
+! 1 - Criar projecto
+! 2 - Fechar projecto
+! 3 - Ver submissões de um projecto
+! 4 - Ver alunos de disciplina leccionada
+! 5 - Ver resultados de um inquérito
+! 0 - Sair
+! Escolha uma opção: Menu principal
+! 1 - Abrir
+! 2 - Guardar
+! 3 - Portal Pessoal
+! 4 - Portal do Docente
+! 0 - Sair
+! Escolha uma opção: Menu principal
+! 1 - Abrir
+! 2 - Guardar
+! 3 - Portal Pessoal
+! 4 - Portal do Docente
+! 0 - Sair
+! Escolha uma opção: 
+\ Nenhuma linha nova no fim do ficheiro
+--- 32,35 ----
   4 - Ver alunos de disciplina leccionada
   5 - Ver resultados de um inquérito
   0 - Sair
-! Escolha uma opção: Nome da disciplina: Nome do projecto: Portal do Docente
-  1 - Criar projecto
-  2 - Fechar projecto
-  3 - Ver submissões de um projecto
-  4 - Ver alunos de disciplina leccionada
-  5 - Ver resultados de um inquérito
-  0 - Sair
-! Escolha uma opção: Nome da disciplina: Nome do projecto: Portal do Docente
-  1 - Criar projecto
-  2 - Fechar projecto
-  3 - Ver submissões de um projecto
+! Escolha uma opção: Nome da disciplina: Nome do projecto: 
+\ Nenhuma linha nova no fim do ficheiro

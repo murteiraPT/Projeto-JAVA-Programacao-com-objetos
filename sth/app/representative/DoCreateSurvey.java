@@ -1,10 +1,11 @@
 package sth.app.representative;
 
 import pt.tecnico.po.ui.DialogException;
+import sth.app.exception.DuplicateSurveyException;
 import sth.app.exception.NoSuchDisciplineException;
 import sth.app.exception.NoSuchProjectException;
 import sth.core.SchoolManager;
-
+import sth.core.exception.DuplicateSurveyIdException;
 import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.NoSuchProjectIdException;
 
@@ -30,13 +31,17 @@ public class DoCreateSurvey extends sth.app.common.ProjectCommand {
 	  try {
 	  _receiver.doCreateSurvey(disciplineName, projectName);
 	  }
+	  catch(NoSuchProjectIdException e)
+	  {
+		  throw new NoSuchProjectException(e.getIdDiscipline(),e.getIdProject());
+	  }
 	  catch(NoSuchDisciplineIdException e)
 	  {
 		  throw new NoSuchDisciplineException(e.getId());
 	  }
-	  catch(NoSuchProjectIdException e)
+	  catch(DuplicateSurveyIdException e)
 	  {
-		  throw new NoSuchProjectException(e.getIdDiscipline(),e.getIdProject());
+		  throw new DuplicateSurveyException(e.getDiscipline(),e.getProject());
 	  }
   }
 

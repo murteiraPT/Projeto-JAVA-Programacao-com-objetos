@@ -4,6 +4,7 @@ import java.util.*;
 
 import sth.core.Survey.Condition;
 import sth.core.exception.ClosingSurveyIdException;
+import sth.core.exception.DuplicateSurveyIdException;
 import sth.core.exception.FinishingSurveyIdException;
 import sth.core.exception.NoSurveyIdException;
 import sth.core.exception.NonEmptySurveyIdException;
@@ -59,7 +60,9 @@ public class Project implements java.io.Serializable{
 		return _submissionMap;
 	}
 	
-	void addSurvey() {
+	void addSurvey() throws DuplicateSurveyIdException {
+		if(_survey!=null)
+			throw new DuplicateSurveyIdException(_discipline.getName(),_name);
 		_survey = new Survey(this);
 	}
 	
@@ -124,6 +127,15 @@ public class Project implements java.io.Serializable{
 		else
 			throw new FinishingSurveyIdException(nameDiscipline,this.getName());
 	}
+	
+	String toStringSurveyState() {
+		return _survey._condition.name();
+	}
+	
+	Set<Answer> getAnswerMap(){
+		return _survey.getAnswerMap();
+	}
+	
 	
 }
 

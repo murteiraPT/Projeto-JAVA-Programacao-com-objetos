@@ -32,12 +32,6 @@ public class DoLogin extends Command<SchoolManager> {
     } catch (NoSuchPersonIdException e) {
       throw new NoSuchPersonException(_login.value());
     }
-    String text = _receiver.showAllNotifications();
-    if(text == ""){}
-    else{
-      _display.add(text);
-      _display.display();
-    }
   }
 
 }

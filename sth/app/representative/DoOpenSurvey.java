@@ -31,6 +31,7 @@ public class DoOpenSurvey extends sth.app.common.ProjectCommand {
 	  String disciplineName = _discipline.value();
 	  String projectName = _project.value();
 	  
+	  System.out.println("cheguei a app e tentei abrir um survey");
 	  try {
 	  _receiver.doOpenSurvey(disciplineName, projectName);
 	  }

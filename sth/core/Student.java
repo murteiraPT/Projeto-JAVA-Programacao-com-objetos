@@ -98,19 +98,30 @@ public class Student extends Person implements java.io.Serializable{
 	
 	//funcionalidades do delegado
 	
-	public void createSurvey(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, NoSuchProjectIdException {
+	public void createSurvey(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, NoSuchProjectIdException, DuplicateSurveyIdException {
 		
 		Discipline discipline;
 		Project project;
+		Boolean hasProject = false;
 		
-		if((discipline = this.getDiscipline(nameDiscipline))==null)
-			throw new NoSuchDisciplineIdException(nameDiscipline);
+		for(Discipline d : _course.getDisciplineMap().values()) {
+			for (Project p: d.getProjectMap().values()) {
+				if(p.getName().equals(nameProject) && d.getName().equals(nameDiscipline) && _disciplineMap.containsKey(nameDiscipline))
+					hasProject=true;
+			}
+		}
+		
+		if(hasProject==false) {
+			throw new NoSuchProjectIdException(nameDiscipline, nameProject);
+		}
+		
+		discipline = this.getDiscipline(nameDiscipline);
 		
 		if(((project = discipline.getProject(nameProject))==null)||(project.getStatus()==false))
 			throw new NoSuchProjectIdException(nameDiscipline, nameProject);
 		
 		project.addSurvey();
-		 
+		
 	}
 	
 	public void cancelSurvey(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, NoSuchProjectIdException,

@@ -11,6 +11,7 @@ import sth.core.exception.NonEmptySurveyIdException;
 import sth.core.exception.OpeningSurveyIdException;
 import sth.core.exception.SurveyFinishedIdException;
 import sth.core.exception.DuplicateIdProjectException;
+import sth.core.exception.DuplicateSurveyIdException;
 import sth.core.exception.FinishingSurveyIdException;
 
 import java.util.*;
@@ -147,7 +148,11 @@ public class SchoolManager {
 
   public String showAllNotifications(){
   	String t ="";
+  	System.out.println("Cheguei atrás do if");
+  	ArrayList<Notification> listaNotifi = _loggedInUser.getNotificationList();
+  	System.out.println(listaNotifi.size());
   	if (_loggedInUser.hasNotifications()) {
+  	  	System.out.println("entrei no if");
   		for(Notification n : _loggedInUser.getNotificationList())
   			t += n.getMessage();
   		_loggedInUser.clearNotifications();
@@ -249,7 +254,7 @@ public void doDeliverProject(String nameDiscipline, String nameProject, String t
 		  throw new NoSuchDisciplineIdException(nameDiscipline);
   }
   
-  public void doCreateSurvey(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, NoSuchProjectIdException {
+  public void doCreateSurvey(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, NoSuchProjectIdException, DuplicateSurveyIdException {
 	  if(isLoggedUserRepresentative())
 		 ((Student) _loggedInUser).createSurvey(nameDiscipline, nameProject);
   }
@@ -261,9 +266,13 @@ public void doDeliverProject(String nameDiscipline, String nameProject, String t
   }
   
   public void doOpenSurvey(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, NoSuchProjectIdException,
-  																					NoSurveyIdException, OpeningSurveyIdException {
+  																				NoSurveyIdException, OpeningSurveyIdException {
+	  
 	  if(isLoggedUserRepresentative())
 		 ((Student) _loggedInUser).openSurvey(nameDiscipline, nameProject);
+	  
+	  ArrayList<Notification> listaNotifi = _loggedInUser.getNotificationList();
+	  
   }
   
   public void doCloseSurvey(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, NoSuchProjectIdException,
@@ -278,21 +287,91 @@ public void doDeliverProject(String nameDiscipline, String nameProject, String t
 		((Student) _loggedInUser).finishSurvey(nameDiscipline, nameProject);
   }
   
+  public String doShowSurveysResultsTeacher(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, NoSuchProjectIdException {
+	  HashMap<Integer,Submission> submissionMap;
+	  Set<Answer> answerMap;
+	  Discipline discipline;
+	  Project project;
+	  String text = "";
+	  
+	  if((discipline = ((Teacher)_loggedInUser).getDiscipline(nameDiscipline))!=null)
+	  {
+		  submissionMap = ((Teacher)_loggedInUser).getProjectSubmissions(discipline, nameProject);
+		  project = discipline.getProject(nameProject);
+		  
+		  text += nameDiscipline + " - " + nameProject;
+		  
+		  if(project.toStringSurveyState().equals("CRIADO"))
+			  text += " (por abrir)\n";
+		  if(project.toStringSurveyState().equals("ABERTO"))
+			  text += " (aberto)\n";
+		  if(project.toStringSurveyState().equals("FECHADO"))
+			  text += " (fechado)\n";
+		  if(project.toStringSurveyState().equals("FINALIZADO"))
+		  {
+			  answerMap = project.getAnswerMap();
+			  text += "\n * Número de submissões: " + submissionMap.size();
+			  text += " * Número de respostas: " + answerMap.size();
+			  text += " * Tempos de resolução (horas) (mínimo, médio, máximo): " + project.getSurvey().getMinTime() + ", " + project.getSurvey().getMediumTime() + ", " + project.getSurvey().getMaxTime() + "\n";
+		  }
+	  }
+	  
+	  return text;
+  }
+  public String doShowSurveysResultsStudent(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, NoSuchProjectIdException {
+	  Discipline discipline;
+	  Project project;
+	  String text = "";
+	  
+	  if((discipline = ((Student)_loggedInUser).getDiscipline(nameDiscipline))!=null)
+	  {
+		  project = discipline.getProject(nameProject);
+		  
+		  text += nameDiscipline + " - " + nameProject;
+		  
+		  if(project.toStringSurveyState().equals("CRIADO"))
+			  text += " (por abrir)\n";
+		  if(project.toStringSurveyState().equals("ABERTO"))
+			  text += " (aberto)\n";
+		  if(project.toStringSurveyState().equals("FECHADO"))
+			  text += " (fechado)\n";
+		  if(project.toStringSurveyState().equals("FINALIZADO"))
+		  {
+			  text += "\n * Número de respostas: " + project.getAnswerMap().size();
+			  text += " * Tempo médio (horas): " + project.getSurvey().getMediumTime() + "\n";
+		  }
+	  }
+	  
+	  return text;
+  }
+  
   public String doShowSurveysDiscipline(String nameDiscipline) throws NoSuchDisciplineIdException{
-	/*  String text = "";
+	  String text = "";
 	  Discipline discipline;
 	  HashMap<String, Project> _projectMap;
 	  
-	  if(isLoggedUserRepresentative()) {
-		  if((discipline = ((Student) _loggedInUser).getDiscipline(nameDiscipline)) == null);
-			  throw new NoSuchDisciplineIdException(nameDiscipline);
+	  if((discipline = ((Student) _loggedInUser).getDiscipline(nameDiscipline)) != null){
 			  
 		  _projectMap = discipline.getProjectMap();
 		  
 		  for(Project p : _projectMap.values())
-			  text += p.toStringSurvey(discipline);
-		  
-	  }*/
-	return "";
+		  {
+			  text += nameDiscipline + " - " + p.getName();
+			  
+			  if(p.toStringSurveyState().equals("CRIADO"))
+				  text += " (por abrir)\n";
+			  
+			  if(p.toStringSurveyState().equals("ABERTO"))
+				  text += " (aberto)\n";
+			  
+			  if(p.toStringSurveyState().equals("FECHADO"))
+				  text += " (fechado)\n";
+			  
+			  if(p.toStringSurveyState().equals("FINALIZADO"))
+				  text += " - " + p.getAnswerMap().size() + " respostas - " + p.getSurvey().getMediumTime() + " horas\n";
+		  } 
+	}
+	  
+	return text;
   }
 }

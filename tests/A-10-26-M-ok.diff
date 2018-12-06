@@ -1,20 +1,19 @@
-*** tests/A-10-26-M-ok.out	2018-12-05 18:33:50.008540349 +0000
---- tests/A-10-26-M-ok.outhyp	2018-12-06 10:30:56.827197085 +0000
+*** tests/A-10-26-M-ok.out	2018-12-02 16:46:43.000000000 +0000
+--- tests/A-10-26-M-ok.outhyp	2018-12-06 18:22:07.562292258 +0000
 ***************
-*** 15,22 ****
+*** 15,21 ****
   2 - Preencher inquérito
   3 - Ver resultados de inquérito
   0 - Sair
 ! Escolha uma opção: Nome da disciplina: Nome do projecto: D1 - P1 (aberto)
-! Portal do Estudante
+  Portal do Estudante
   1 - Entregar projecto
   2 - Preencher inquérito
-  3 - Ver resultados de inquérito
 --- 15,21 ----
   2 - Preencher inquérito
   3 - Ver resultados de inquérito
   0 - Sair
-! Escolha uma opção: Nome da disciplina: Nome do projecto: Portal do Estudante
+! Escolha uma opção: Nome da disciplina: Nome do projecto: D1 - P1 (por abrir)
+  Portal do Estudante
   1 - Entregar projecto
   2 - Preencher inquérito
-  3 - Ver resultados de inquérito

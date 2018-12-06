@@ -43,6 +43,11 @@ public class DoOpen extends Command<SchoolManager> {
     {
     	_receiver.setSerialFile(_serial);
     	_receiver.updateSchool( (School) obj.readObject() );
+    	String text = _receiver.showAllNotifications();
+        if(text != "") {
+          _display.add(text);
+          _display.display();
+        }
     }
     catch (FileNotFoundException fnfe) {
 		_display.popup(Message.fileNotFound());
@@ -53,6 +58,7 @@ public class DoOpen extends Command<SchoolManager> {
 	catch (NoSuchPersonIdException np) {
 		throw new NoSuchPersonException(np.getId());
 	}
+    
   }
 
 }

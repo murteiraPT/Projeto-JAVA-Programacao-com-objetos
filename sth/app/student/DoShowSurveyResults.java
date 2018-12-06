@@ -1,7 +1,6 @@
 package sth.app.student;
 
 import pt.tecnico.po.ui.DialogException;
-import pt.tecnico.po.ui.Input;
 import sth.core.SchoolManager;
 
 import sth.core.exception.NoSuchDisciplineIdException;
@@ -23,7 +22,13 @@ public class DoShowSurveyResults extends sth.app.common.ProjectCommand {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void myExecute() throws NoSuchProjectIdException, NoSuchDisciplineIdException, NoSurveyException {
-    //FIXME implement command
+	  String disciplineName = _discipline.value();
+	  String projectName = _project.value();
+	  
+	  String text = _receiver.doShowSurveysResultsStudent(disciplineName, projectName);
+		
+	  _display.add(text);
+	  _display.display();  
   }
 
 }

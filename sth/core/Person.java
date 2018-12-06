@@ -15,7 +15,6 @@ public class Person implements java.io.Serializable {
 		_id = nextPersonID;
 		_name = name;
 		_phoneNumber = phone;
-		_hasNotifications = false;
 		_notificationsList = new ArrayList<>();
 	}
 
@@ -39,7 +38,7 @@ public class Person implements java.io.Serializable {
 	}
 
 	Boolean hasNotifications(){
-		return _hasNotifications;
+		return _notificationsList.size() > 0;
 	}
 
 	ArrayList<Notification> getNotificationList(){
@@ -48,12 +47,10 @@ public class Person implements java.io.Serializable {
 
 	void receiveNotification(Notification n){
 		_notificationsList.add(n);
-		_hasNotifications = true;
 	}
 
 	void clearNotifications(){
 		_notificationsList.clear();
-		_hasNotifications = false;
 	}
 
 }

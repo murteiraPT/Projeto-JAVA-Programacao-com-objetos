@@ -11,3 +11,5 @@
 /NonEmptySurveyIdException.class
 /OpeningSurveyIdException.class
 /SurveyFinishedIdException.class
+/Snippet.class
+/DuplicateSurveyIdException.class
