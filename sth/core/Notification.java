@@ -1,6 +1,6 @@
 package sth.core;
 
-public class Notification{
+public class Notification implements java.io.Serializable{
 	private String _message;
 	private Project _project;
 	private Discipline _discipline;

@@ -2,7 +2,6 @@ package sth.core;
 
 import java.util.*;
 
-import sth.core.Survey.Condition;
 import sth.core.exception.ClosingSurveyIdException;
 import sth.core.exception.DuplicateSurveyIdException;
 import sth.core.exception.FinishingSurveyIdException;
@@ -33,6 +32,8 @@ public class Project implements java.io.Serializable{
 	
 	void close() {
 		_isOpen = false;
+		if(_survey!=null)
+			_survey.open();
 	}
 	
 	Boolean getStatus() {
@@ -93,7 +94,7 @@ public class Project implements java.io.Serializable{
 		if(_survey == null)
 			throw new NoSurveyIdException(nameDiscipline,this.getName());
 		
-		if(((!this.getStatus())&&(_survey.getState().equals("Criado"))) || (_survey.getState().equals("Fechado")))
+		if(_survey.getState().equals("Fechado"))
 			_survey.open();
 		else
 			throw new OpeningSurveyIdException(nameDiscipline,this.getName());

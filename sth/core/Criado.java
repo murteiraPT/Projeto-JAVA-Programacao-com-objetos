@@ -20,4 +20,16 @@ public class Criado extends Condition {
   public String toString() {
 	  return "Criado";
   }
+
+	@Override
+	public void close(Survey s) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void finalize(Survey s) {
+		// TODO Auto-generated method stub
+		
+	}
 }

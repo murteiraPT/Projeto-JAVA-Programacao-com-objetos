@@ -7,10 +7,10 @@ public class Fechado extends Condition {
   protected Fechado() {}
 
   public static Fechado instancia() {
-    if (this.instancia == null)
-      this.instancia = new Fechado();
+    if (instancia == null)
+      instancia = new Fechado();
 
-    return this.instancia;
+    return instancia;
   }
   
   public void finalize(Survey s) {
@@ -19,4 +19,16 @@ public class Fechado extends Condition {
   public String toString() {
 	  return "Fecahdo";
   }
+
+@Override
+public void open(Survey s) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void close(Survey s) {
+	// TODO Auto-generated method stub
+	
+}
 }

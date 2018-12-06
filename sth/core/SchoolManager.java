@@ -148,11 +148,7 @@ public class SchoolManager {
 
   public String showAllNotifications(){
   	String t ="";
-  	System.out.println("Cheguei atrás do if");
-  	ArrayList<Notification> listaNotifi = _loggedInUser.getNotificationList();
-  	System.out.println(listaNotifi.size());
   	if (_loggedInUser.hasNotifications()) {
-  	  	System.out.println("entrei no if");
   		for(Notification n : _loggedInUser.getNotificationList())
   			t += n.getMessage();
   		_loggedInUser.clearNotifications();
@@ -301,13 +297,13 @@ public void doDeliverProject(String nameDiscipline, String nameProject, String t
 		  
 		  text += nameDiscipline + " - " + nameProject;
 		  
-		  if(project.toStringSurveyState().equals("CRIADO"))
+		  if(project.toStringSurveyState().equals("Criado"))
 			  text += " (por abrir)\n";
-		  if(project.toStringSurveyState().equals("ABERTO"))
+		  if(project.toStringSurveyState().equals("Aberto"))
 			  text += " (aberto)\n";
-		  if(project.toStringSurveyState().equals("FECHADO"))
+		  if(project.toStringSurveyState().equals("Fechado"))
 			  text += " (fechado)\n";
-		  if(project.toStringSurveyState().equals("FINALIZADO"))
+		  if(project.toStringSurveyState().equals("Finalizado"))
 		  {
 			  answerMap = project.getAnswerMap();
 			  text += "\n * Número de submissões: " + submissionMap.size();
@@ -329,13 +325,13 @@ public void doDeliverProject(String nameDiscipline, String nameProject, String t
 		  
 		  text += nameDiscipline + " - " + nameProject;
 		  
-		  if(project.toStringSurveyState().equals("CRIADO"))
+		  if(project.toStringSurveyState().equals("Criado"))
 			  text += " (por abrir)\n";
-		  if(project.toStringSurveyState().equals("ABERTO"))
+		  if(project.toStringSurveyState().equals("Aberto"))
 			  text += " (aberto)\n";
-		  if(project.toStringSurveyState().equals("FECHADO"))
+		  if(project.toStringSurveyState().equals("Fechado"))
 			  text += " (fechado)\n";
-		  if(project.toStringSurveyState().equals("FINALIZADO"))
+		  if(project.toStringSurveyState().equals("Finalizado"))
 		  {
 			  text += "\n * Número de respostas: " + project.getAnswerMap().size();
 			  text += " * Tempo médio (horas): " + project.getSurvey().getMediumTime() + "\n";
@@ -358,16 +354,16 @@ public void doDeliverProject(String nameDiscipline, String nameProject, String t
 		  {
 			  text += nameDiscipline + " - " + p.getName();
 			  
-			  if(p.toStringSurveyState().equals("CRIADO"))
+			  if(p.toStringSurveyState().equals("Criado"))
 				  text += " (por abrir)\n";
 			  
-			  if(p.toStringSurveyState().equals("ABERTO"))
+			  if(p.toStringSurveyState().equals("Aberto"))
 				  text += " (aberto)\n";
 			  
-			  if(p.toStringSurveyState().equals("FECHADO"))
+			  if(p.toStringSurveyState().equals("Fechado"))
 				  text += " (fechado)\n";
 			  
-			  if(p.toStringSurveyState().equals("FINALIZADO"))
+			  if(p.toStringSurveyState().equals("Finalizado"))
 				  text += " - " + p.getAnswerMap().size() + " respostas - " + p.getSurvey().getMediumTime() + " horas\n";
 		  } 
 	}

@@ -7,13 +7,31 @@ public class Finalizado extends Condition {
   protected Finalizado() {}
 
   public static Finalizado instancia() {
-    if (this.instancia == null)
-      this.instancia = new Finalizado();
+    if (instancia == null)
+      instancia = new Finalizado();
 
-    return this.instancia;
+    return instancia;
   }
   
   public String toString() {
 	  return "Finalizado";
   }
+
+@Override
+public void open(Survey s) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void close(Survey s) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void finalize(Survey s) {
+	// TODO Auto-generated method stub
+	
+}
 }
