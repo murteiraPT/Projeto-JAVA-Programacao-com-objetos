@@ -149,7 +149,7 @@ public class Student extends Person implements java.io.Serializable{
 		Discipline discipline;
 		Project project;
 		
-		if((discipline = this.getDiscipline(nameDiscipline))==null)
+		if((discipline = _course.getDiscipline(nameDiscipline))==null)
 			throw new NoSuchDisciplineIdException(nameDiscipline);
 		
 		if((project = discipline.getProject(nameProject))==null)
@@ -163,7 +163,7 @@ public class Student extends Person implements java.io.Serializable{
 		Discipline discipline;
 		Project project;
 		
-		if((discipline = this.getDiscipline(nameDiscipline))==null)
+		if((discipline = _course.getDiscipline(nameDiscipline))==null)
 			throw new NoSuchDisciplineIdException(nameDiscipline);
 		
 		if((project = discipline.getProject(nameProject))==null)
@@ -177,7 +177,7 @@ public class Student extends Person implements java.io.Serializable{
 		Discipline discipline;
 		Project project;
 		
-		if((discipline = this.getDiscipline(nameDiscipline))==null)
+		if((discipline = _course.getDiscipline(nameDiscipline))==null)
 			throw new NoSuchDisciplineIdException(nameDiscipline);
 		
 		if((project = discipline.getProject(nameProject))==null)

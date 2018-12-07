@@ -16,9 +16,9 @@ public class Notification implements java.io.Serializable{
 		String nomed = _discipline.getName();
 		String s;
 		if(_message.equals("Aberto"))
-			s = "Pode preencher inquérito do projecto " + nomep + " da disciplina " + nomed;
+			s = "Pode preencher inquérito do projecto " + nomep + " da disciplina " + nomed + "\n";
 		else
-			s = "Resultados do inquérito do projecto " + nomep + " da disciplina " + nomed;
+			s = "Resultados do inquérito do projecto " + nomep + " da disciplina " + nomed + "\n";
 		return s;
 	}
 }

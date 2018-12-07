@@ -281,7 +281,7 @@ public void doDeliverProject(String nameDiscipline, String nameProject, String t
 		((Student) _loggedInUser).finishSurvey(nameDiscipline, nameProject);
   }
   
-  public String doShowSurveysResultsTeacher(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, NoSuchProjectIdException {
+  public String doShowSurveysResultsTeacher(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, NoSuchProjectIdException, NoSurveyIdException {
 	  HashMap<Integer,Submission> submissionMap;
 	  Set<Answer> answerMap;
 	  Discipline discipline;
@@ -292,6 +292,9 @@ public void doDeliverProject(String nameDiscipline, String nameProject, String t
 	  {
 		  submissionMap = ((Teacher)_loggedInUser).getProjectSubmissions(discipline, nameProject);
 		  project = discipline.getProject(nameProject);
+		  
+		  if(project.getSurvey()==null)
+			  throw new NoSurveyIdException(nameDiscipline,nameProject);
 		  
 		  text += nameDiscipline + " - " + nameProject;
 		  
@@ -318,30 +321,16 @@ public void doDeliverProject(String nameDiscipline, String nameProject, String t
 	  String text = "";
 	  Boolean hasProject = false;
 	  Boolean hasDiscipline = false;
-	  
-	  for(Discipline d : ((Student)_loggedInUser).getCourse().getDisciplineMap().values())
-	  {
-		  for (Project p: d.getProjectMap().values()) {
-				if(p.getName().equals(nameProject) && d.getName().equals(nameDiscipline) && (((Student)_loggedInUser).getDiscipline(nameDiscipline)!=null))
-					hasProject=true;
-			}
-		  if(d.getName().equals(nameDiscipline))
-			  hasDiscipline = true;
-	  }
-	  
-	  if(hasDiscipline==false)
-		  throw new NoSuchDisciplineIdException(nameDiscipline);
-	  
-	  if(hasProject==false)
-		  throw new NoSuchProjectIdException(nameDiscipline, nameProject);
-	  
-	  
+
+	  	  
 	  if((discipline = ((Student)_loggedInUser).getDiscipline(nameDiscipline))!=null)
 	  {
 		  project = discipline.getProject(nameProject);
 		  
 		  text += nameDiscipline + " - " + nameProject;
 		  
+		  if(project == null)
+			  throw new NoSuchProjectIdException(nameDiscipline,nameProject);
 		  
 		  if(project.getSurvey()==null)
 			  throw new NoSurveyIdException(nameDiscipline,nameProject);
@@ -366,29 +355,39 @@ public void doDeliverProject(String nameDiscipline, String nameProject, String t
   public String doShowSurveysDiscipline(String nameDiscipline) throws NoSuchDisciplineIdException{
 	  String text = "";
 	  Discipline discipline;
+	  Course course;
 	  HashMap<String, Project> _projectMap;
 	  
-	  if((discipline = ((Student) _loggedInUser).getDiscipline(nameDiscipline)) != null){
+	  course = ((Student) _loggedInUser).getCourse();	  
+	  discipline = course.getDiscipline(nameDiscipline);
+	  
+	  
+	  if(discipline!= null){
 			  
 		  _projectMap = discipline.getProjectMap();
 		  
 		  for(Project p : _projectMap.values())
 		  {
-			  text += nameDiscipline + " - " + p.getName();
-			  
-			  if(p.toStringSurveyState().equals("Criado"))
-				  text += " (por abrir)\n";
-			  
-			  if(p.toStringSurveyState().equals("Aberto"))
-				  text += " (aberto)\n";
-			  
-			  if(p.toStringSurveyState().equals("Fechado"))
-				  text += " (fechado)\n";
-			  
-			  if(p.toStringSurveyState().equals("Finalizado"))
-				  text += " - " + p.getAnswerMap().size() + " respostas - " + p.getSurvey().getMediumTime() + " horas\n";
+			  if(p.getSurvey()!=null)
+			  {
+				  text += nameDiscipline + " - " + p.getName();
+				  
+				  if(p.toStringSurveyState().equals("Criado"))
+					  text += " (por abrir)\n";
+				  
+				  if(p.toStringSurveyState().equals("Aberto"))
+					  text += " (aberto)\n";
+				  
+				  if(p.toStringSurveyState().equals("Fechado"))
+					  text += " (fechado)\n";
+				  
+				  if(p.toStringSurveyState().equals("Finalizado"))
+					  text += " - " + p.getAnswerMap().size() + " respostas - " + p.getSurvey().getMediumTime() + " horas\n";
+			  }
 		  } 
 	}
+	else
+		throw new NoSuchDisciplineIdException(nameDiscipline);
 	  
 	return text;
   }

@@ -91,8 +91,21 @@ public class Discipline implements java.io.Serializable {
 	}
 
 	void sendAllNotification(Notification n){
+		
+		Set<Student> listStudents = new HashSet<>();
+		
+		for(Discipline d : _course.getDisciplineMap().values())
+		{
+			for(Student s : d.getStudentMap().values())
+				if((s.isRepresentative())&&(!(listStudents.contains(s)))) {
+					s.receiveNotification(n);
+					listStudents.add(s);
+				}
+		}
+		
 		for(Student s : _studentMap.values()){
-			s.receiveNotification(n);
+			if(!listStudents.contains(s))
+				s.receiveNotification(n);
 		}
 		for(Teacher t : _teacherMap.values()){
 			t.receiveNotification(n);
