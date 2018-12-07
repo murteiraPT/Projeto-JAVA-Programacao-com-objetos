@@ -1,27 +1,19 @@
 *** tests/A-10-46-M-ok.out	2018-11-30 11:26:25.000000000 +0000
---- tests/A-10-46-M-ok.outhyp	2018-12-06 22:44:43.546910955 +0000
+--- tests/A-10-46-M-ok.outhyp	2018-12-07 00:22:01.387729580 +0000
 ***************
-*** 15,30 ****
+*** 15,21 ****
   2 - Preencher inquérito
   3 - Ver resultados de inquérito
   0 - Sair
 ! Escolha uma opção: Nome da disciplina: Nome do projecto: Ver resultados de inquérito: Operação inválida: O projecto 'P7' da disciplina 'D1' não tem inquérito associado.
-! Portal do Estudante
-! 1 - Entregar projecto
-! 2 - Preencher inquérito
-! 3 - Ver resultados de inquérito
-! 0 - Sair
-! Escolha uma opção: Menu principal
-! 1 - Abrir
-! 2 - Guardar
-! 3 - Portal Pessoal
-! 5 - Portal do Estudante
-! 0 - Sair
-! Escolha uma opção: 
-\ Nenhuma linha nova no fim do ficheiro
---- 15,18 ----
+  Portal do Estudante
+  1 - Entregar projecto
+  2 - Preencher inquérito
+--- 15,21 ----
   2 - Preencher inquérito
   3 - Ver resultados de inquérito
   0 - Sair
-! Escolha uma opção: Nome da disciplina: Nome do projecto: 
-\ Nenhuma linha nova no fim do ficheiro
+! Escolha uma opção: Nome da disciplina: Nome do projecto: Ver resultados de inquérito: Operação inválida: O projecto 'P7' não existe na disciplina 'D1'.
+  Portal do Estudante
+  1 - Entregar projecto
+  2 - Preencher inquérito

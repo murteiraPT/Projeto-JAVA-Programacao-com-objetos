@@ -1,10 +1,10 @@
 package sth.app.student;
 
-import pt.tecnico.po.ui.DialogException;
 import sth.core.SchoolManager;
 
 import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.NoSuchProjectIdException;
+import sth.core.exception.NoSurveyIdException;
 import sth.app.exception.NoSurveyException;
 
 /**
@@ -21,14 +21,21 @@ public class DoShowSurveyResults extends sth.app.common.ProjectCommand {
 
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
-  public final void myExecute() throws NoSuchProjectIdException, NoSuchDisciplineIdException, NoSurveyException {
+  public final void myExecute() throws NoSuchDisciplineIdException, NoSuchProjectIdException, NoSurveyException{
 	  String disciplineName = _discipline.value();
 	  String projectName = _project.value();
+	  
+	  try {
 	  
 	  String text = _receiver.doShowSurveysResultsStudent(disciplineName, projectName);
 		
 	  _display.add(text);
-	  _display.display();  
+	  _display.display();
+	  }
+	  catch(NoSurveyIdException e)
+	  {
+		  throw new NoSurveyException(e.getDiscipline(),e.getProject());
+	  }
   }
 
 }

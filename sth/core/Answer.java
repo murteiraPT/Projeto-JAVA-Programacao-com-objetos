@@ -1,6 +1,6 @@
 package sth.core;
 
-public class Answer{
+public class Answer implements java.io.Serializable{
 
 	private String _message;
 	private int _hours;

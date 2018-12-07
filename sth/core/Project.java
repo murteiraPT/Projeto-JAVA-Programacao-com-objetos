@@ -71,6 +71,8 @@ public class Project implements java.io.Serializable{
 		
 		if(_survey == null)
 			throw new NoSurveyIdException(nameDiscipline,this.getName());
+		
+		
 		if((_survey.getState().equals("Aberto")||(_survey.getState().equals("Criado")))){
 			if(_survey.isEmptyAnswer())
 				_survey = null;
@@ -107,11 +109,13 @@ public class Project implements java.io.Serializable{
 		
 		if(_survey.getState().equals("Aberto"))
 			_survey.close();
-		
-		if(_survey.getState().equals("Fechado"))
-			return;
 		else
-			throw new ClosingSurveyIdException(nameDiscipline,this.getName());
+		{
+			if(_survey.getState().equals("Fechado"))
+				return;
+			else
+				throw new ClosingSurveyIdException(nameDiscipline,this.getName());
+		}
 	}
 	
 	void finishSurvey(String nameDiscipline) throws NoSurveyIdException, FinishingSurveyIdException {
@@ -121,11 +125,14 @@ public class Project implements java.io.Serializable{
 		
 		if(_survey.getState().equals("Fechado"))
 			_survey.close();
-		
-		if(_survey.getState().equals("Finalizado"))
-			return;
 		else
-			throw new FinishingSurveyIdException(nameDiscipline,this.getName());
+		{
+			if(_survey.getState().equals("Finalizado"))
+				return;
+			else
+				throw new FinishingSurveyIdException(nameDiscipline,this.getName());
+		}
+		
 	}
 	
 	String toStringSurveyState() {

@@ -266,9 +266,7 @@ public void doDeliverProject(String nameDiscipline, String nameProject, String t
 	  
 	  if(isLoggedUserRepresentative())
 		 ((Student) _loggedInUser).openSurvey(nameDiscipline, nameProject);
-	  
-	  ArrayList<Notification> listaNotifi = _loggedInUser.getNotificationList();
-	  
+	  	  
   }
   
   public void doCloseSurvey(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, NoSuchProjectIdException,
@@ -314,16 +312,40 @@ public void doDeliverProject(String nameDiscipline, String nameProject, String t
 	  
 	  return text;
   }
-  public String doShowSurveysResultsStudent(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, NoSuchProjectIdException {
+  public String doShowSurveysResultsStudent(String nameDiscipline, String nameProject) throws NoSuchDisciplineIdException, NoSuchProjectIdException, NoSurveyIdException {
 	  Discipline discipline;
 	  Project project;
 	  String text = "";
+	  Boolean hasProject = false;
+	  Boolean hasDiscipline = false;
+	  
+	  for(Discipline d : ((Student)_loggedInUser).getCourse().getDisciplineMap().values())
+	  {
+		  for (Project p: d.getProjectMap().values()) {
+				if(p.getName().equals(nameProject) && d.getName().equals(nameDiscipline) && (((Student)_loggedInUser).getDiscipline(nameDiscipline)!=null))
+					hasProject=true;
+			}
+		  if(d.getName().equals(nameDiscipline))
+			  hasDiscipline = true;
+	  }
+	  
+	  if(hasDiscipline==false)
+		  throw new NoSuchDisciplineIdException(nameDiscipline);
+	  
+	  if(hasProject==false)
+		  throw new NoSuchProjectIdException(nameDiscipline, nameProject);
+	  
 	  
 	  if((discipline = ((Student)_loggedInUser).getDiscipline(nameDiscipline))!=null)
 	  {
 		  project = discipline.getProject(nameProject);
 		  
 		  text += nameDiscipline + " - " + nameProject;
+		  
+		  
+		  if(project.getSurvey()==null)
+			  throw new NoSurveyIdException(nameDiscipline,nameProject);
+		  
 		  
 		  if(project.toStringSurveyState().equals("Criado"))
 			  text += " (por abrir)\n";
@@ -370,4 +392,27 @@ public void doDeliverProject(String nameDiscipline, String nameProject, String t
 	  
 	return text;
   }
+  
+  public void doAnswerSurvey(String nameDiscipline,String nameProject, int hours, String comment) throws NoSuchDisciplineIdException, NoSuchProjectIdException, NoSurveyIdException {
+	  Discipline discipline;
+	  Project project;
+	  HashMap<Integer,Submission> listSubmission;
+	  if((discipline = ((Student) _loggedInUser).getDiscipline(nameDiscipline)) != null){
+		  
+		  project = discipline.getProject(nameProject);
+		  if(project==null)
+			  throw new NoSuchProjectIdException(nameDiscipline, nameProject);
+		  
+		  if((project.getSurvey()==null)||(!(project.toStringSurveyState().equals("Aberto"))))
+			  throw new NoSurveyIdException(nameDiscipline,nameProject);
+		  
+		  listSubmission = project.getSubmissions();
+		  if(!(listSubmission.containsKey(_loggedInUser.getId())))
+			  throw new NoSuchProjectIdException(nameDiscipline, nameProject);
+		  
+		  project.getSurvey().addAnswer((Student)_loggedInUser, hours, comment);
+	  }
+  }
+  
+  
 }

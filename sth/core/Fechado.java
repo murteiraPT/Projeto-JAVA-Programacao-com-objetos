@@ -17,12 +17,12 @@ public class Fechado extends Condition {
 	  s.transporte(Finalizado.instancia());
   }
   public String toString() {
-	  return "Fecahdo";
+	  return "Fechado";
   }
 
 @Override
 public void open(Survey s) {
-	// TODO Auto-generated method stub
+	s.transporte(Aberto.instancia());
 	
 }
 

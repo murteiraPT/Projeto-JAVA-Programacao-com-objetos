@@ -103,21 +103,27 @@ public class Student extends Person implements java.io.Serializable{
 		Discipline discipline;
 		Project project;
 		Boolean hasProject = false;
+		Boolean hasDiscipline = false;
+		
 		
 		for(Discipline d : _course.getDisciplineMap().values()) {
 			for (Project p: d.getProjectMap().values()) {
-				if(p.getName().equals(nameProject) && d.getName().equals(nameDiscipline) && _disciplineMap.containsKey(nameDiscipline))
+				if(p.getName().equals(nameProject) && d.getName().equals(nameDiscipline))
 					hasProject=true;
 			}
+			if(d.getName().equals(nameDiscipline))
+				hasDiscipline = true;
 		}
 		
-		if(hasProject==false) {
+		if(hasDiscipline==false)
+			throw new NoSuchDisciplineIdException(nameDiscipline);
+		
+		if(hasProject==false)
 			throw new NoSuchProjectIdException(nameDiscipline, nameProject);
-		}
 		
-		discipline = this.getDiscipline(nameDiscipline);
+		discipline =_course.getDiscipline(nameDiscipline);
 		
-		if(((project = discipline.getProject(nameProject))==null)||(project.getStatus()==false))
+		if(((project = discipline.getProject(nameProject))==null)||(project.getStatus()==false)) //cria se mesmo com projeto fechado? 
 			throw new NoSuchProjectIdException(nameDiscipline, nameProject);
 		
 		project.addSurvey();
@@ -129,7 +135,7 @@ public class Student extends Person implements java.io.Serializable{
 		Discipline discipline;
 		Project project;
 		
-		if((discipline = this.getDiscipline(nameDiscipline))==null)
+		if((discipline = _course.getDiscipline(nameDiscipline))==null)
 			throw new NoSuchDisciplineIdException(nameDiscipline);
 		
 		if((project = discipline.getProject(nameProject))==null)
