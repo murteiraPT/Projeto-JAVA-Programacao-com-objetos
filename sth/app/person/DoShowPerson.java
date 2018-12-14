@@ -11,7 +11,6 @@ import sth.core.SchoolManager;
  */
 public class DoShowPerson extends Command<SchoolManager> {
 	
-	private String show;
   /**
    * @param receiver
    */
@@ -23,8 +22,8 @@ public class DoShowPerson extends Command<SchoolManager> {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() {
-	 show = _receiver.showUser();
-	 _display.add(show);
+	 String text = _receiver.showUser();
+	 _display.add(text);
 	 _display.display();
 	  
   }

@@ -8,7 +8,6 @@ public class Person implements java.io.Serializable {
 	private int _id;
 	private String _name;
 	private int _phoneNumber;
-	private boolean _hasNotifications;
 	private ArrayList<Notification> _notificationsList;
 
 	public Person(int nextPersonID, int phone, String name){

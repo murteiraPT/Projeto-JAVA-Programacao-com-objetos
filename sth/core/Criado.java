@@ -2,15 +2,15 @@ package sth.core;
 
 public class Criado extends Condition {
 
-  private static Criado instancia;
+  private static Criado _instancia;
 
   protected Criado() {}
 
   public static Criado instancia() {
-    if (instancia == null)
-      instancia = new Criado();
+    if (_instancia == null)
+      _instancia = new Criado();
 
-    return instancia;
+    return _instancia;
   }
   
   public void open(Survey s) {

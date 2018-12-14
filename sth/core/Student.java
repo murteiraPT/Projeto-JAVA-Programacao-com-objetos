@@ -123,7 +123,7 @@ public class Student extends Person implements java.io.Serializable{
 		
 		discipline =_course.getDiscipline(nameDiscipline);
 		
-		if(((project = discipline.getProject(nameProject))==null)||(project.getStatus()==false)) //cria se mesmo com projeto fechado? 
+		if(((project = discipline.getProject(nameProject))==null)||(project.getStatus()==false))
 			throw new NoSuchProjectIdException(nameDiscipline, nameProject);
 		
 		project.addSurvey();

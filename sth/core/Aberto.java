@@ -1,18 +1,17 @@
 package sth.core;
-import sth.core.exception.FinishingSurveyIdException;
 
 
 public class Aberto extends Condition {
 
-  private static Aberto instancia;
+  private static Aberto _instancia;
 
   protected Aberto() {}
 
   public static Aberto instancia() {
-    if (instancia == null)
-      instancia = new Aberto();
+    if (_instancia == null)
+      _instancia = new Aberto();
 
-    return instancia;
+    return _instancia;
   }
   
   public void close(Survey s) {

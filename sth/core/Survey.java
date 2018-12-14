@@ -91,6 +91,9 @@ public class Survey implements java.io.Serializable{
 	int getMinTime() {
 		int min = Integer.MAX_VALUE;
 		
+		if(_answerMap.size() == 0)
+			return 0;
+		
 		for(Answer a : _answerMap)
 		{
 			if(min>a.getHours())
@@ -102,6 +105,9 @@ public class Survey implements java.io.Serializable{
 	int getMaxTime() {
 		int min = Integer.MIN_VALUE;
 		
+		if(_answerMap.size() == 0)
+			return 0;
+		
 		for(Answer a : _answerMap)
 		{
 			if(min<a.getHours())
@@ -111,6 +117,9 @@ public class Survey implements java.io.Serializable{
 	}
 	int getMediumTime() {
 		int sum = 0;
+		
+		if(_answerMap.size() == 0)
+			return 0;
 		
 		for(Answer a : _answerMap)
 			sum += a.getHours();

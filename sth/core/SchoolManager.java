@@ -19,11 +19,9 @@ import java.util.HashMap;
 import java.io.IOException;
 
 
-//FIXME import other classes if needed
 
 public class SchoolManager {
 
-  //FIXME add object attributes if needed
   private School _school;
   private Person _loggedInUser;
   private String _serialFile;
@@ -60,7 +58,7 @@ public class SchoolManager {
   public void updateSchool(School newS) throws NoSuchPersonIdException{
 	  int idUser = _loggedInUser.getId();
 	  
-	  if(newS.ExistId(idUser))
+	  if(newS.getAllUsers().containsKey(idUser))
 	  {
 		  _school = newS;
 		  login(idUser);
@@ -222,7 +220,7 @@ public class SchoolManager {
 	  return text;
   }
   
-public void doDeliverProject(String nameDiscipline, String nameProject, String text) throws NoSuchDisciplineIdException, NoSuchProjectIdException {
+  public void doDeliverProject(String nameDiscipline, String nameProject, String text) throws NoSuchDisciplineIdException, NoSuchProjectIdException {
 	  if(isLoggedUserStudent())
 		 ((Student) _loggedInUser).submitProject(nameDiscipline, nameProject, text);
   }
@@ -308,8 +306,8 @@ public void doDeliverProject(String nameDiscipline, String nameProject, String t
 		  {
 			  answerMap = project.getAnswerMap();
 			  text += "\n * Número de submissões: " + submissionMap.size();
-			  text += " * Número de respostas: " + answerMap.size();
-			  text += " * Tempos de resolução (horas) (mínimo, médio, máximo): " + project.getSurvey().getMinTime() + ", " + project.getSurvey().getMediumTime() + ", " + project.getSurvey().getMaxTime() + "\n";
+			  text += "\n * Número de respostas: " + answerMap.size();
+			  text += "\n * Tempos de resolução (horas) (mínimo, médio, máximo): " + project.getSurvey().getMinTime() + ", " + project.getSurvey().getMediumTime() + ", " + project.getSurvey().getMaxTime() + "\n";
 		  }
 	  }
 	  
@@ -319,8 +317,6 @@ public void doDeliverProject(String nameDiscipline, String nameProject, String t
 	  Discipline discipline;
 	  Project project;
 	  String text = "";
-	  Boolean hasProject = false;
-	  Boolean hasDiscipline = false;
 
 	  	  
 	  if((discipline = ((Student)_loggedInUser).getDiscipline(nameDiscipline))!=null)
@@ -345,7 +341,7 @@ public void doDeliverProject(String nameDiscipline, String nameProject, String t
 		  if(project.toStringSurveyState().equals("Finalizado"))
 		  {
 			  text += "\n * Número de respostas: " + project.getAnswerMap().size();
-			  text += " * Tempo médio (horas): " + project.getSurvey().getMediumTime() + "\n";
+			  text += "\n * Tempo médio (horas): " + project.getSurvey().getMediumTime() + "\n";
 		  }
 	  }
 	  
@@ -356,7 +352,7 @@ public void doDeliverProject(String nameDiscipline, String nameProject, String t
 	  String text = "";
 	  Discipline discipline;
 	  Course course;
-	  HashMap<String, Project> _projectMap;
+	  HashMap<String, Project> projectMap;
 	  
 	  course = ((Student) _loggedInUser).getCourse();	  
 	  discipline = course.getDiscipline(nameDiscipline);
@@ -364,9 +360,9 @@ public void doDeliverProject(String nameDiscipline, String nameProject, String t
 	  
 	  if(discipline!= null){
 			  
-		  _projectMap = discipline.getProjectMap();
+		  projectMap = discipline.getProjectMap();
 		  
-		  for(Project p : _projectMap.values())
+		  for(Project p : projectMap.values())
 		  {
 			  if(p.getSurvey()!=null)
 			  {

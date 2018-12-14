@@ -2,15 +2,15 @@ package sth.core;
 
 public class Fechado extends Condition {
 
-  private static Fechado instancia;
+  private static Fechado _instancia;
 
   protected Fechado() {}
 
   public static Fechado instancia() {
-    if (instancia == null)
-      instancia = new Fechado();
+    if (_instancia == null)
+      _instancia = new Fechado();
 
-    return instancia;
+    return _instancia;
   }
   
   public void finalize(Survey s) {

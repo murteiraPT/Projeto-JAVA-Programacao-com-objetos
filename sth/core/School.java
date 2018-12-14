@@ -53,12 +53,9 @@ public class School implements java.io.Serializable {
      * @param id
      * @return HashMap<Integer, Person>
      */
-    boolean ExistId(int id){
-    	return _personMap.containsKey(id);
-    }
     
     Person getPerson (int id) throws NoSuchPersonIdException{
-    	if(ExistId(id))
+    	if(_personMap.containsKey(id))
     		return _personMap.get(id);
     	else
     		throw new NoSuchPersonIdException(id);

@@ -65,6 +65,9 @@ public class Project implements java.io.Serializable{
 		if(_survey!=null)
 			throw new DuplicateSurveyIdException(_discipline.getName(),_name);
 		_survey = new Survey(this);
+		
+		if(!_isOpen)
+			_survey.open();
 	}
 	
 	void cancelSurvey(String nameDiscipline) throws NoSurveyIdException, NonEmptySurveyIdException, SurveyFinishedIdException {

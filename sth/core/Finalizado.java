@@ -2,15 +2,15 @@ package sth.core;
 
 public class Finalizado extends Condition {
 
-  private static Finalizado instancia;
+  private static Finalizado _instancia;
 
   protected Finalizado() {}
 
   public static Finalizado instancia() {
-    if (instancia == null)
-      instancia = new Finalizado();
+    if (_instancia == null)
+      _instancia = new Finalizado();
 
-    return instancia;
+    return _instancia;
   }
   
   public String toString() {

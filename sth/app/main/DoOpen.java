@@ -5,8 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
-import sth.core.exception.ImportFileException;
-
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
@@ -38,10 +36,10 @@ public class DoOpen extends Command<SchoolManager> {
   @Override
   public final void execute() throws DialogException, NoSuchPersonException {
 	  _form.parse();
-	  String _serial = _nameFile.value();
-    try (ObjectInputStream obj = new ObjectInputStream(new FileInputStream(_serial)))
+	String serial = _nameFile.value();
+    try (ObjectInputStream obj = new ObjectInputStream(new FileInputStream(serial)))
     {
-    	_receiver.setSerialFile(_serial);
+    	_receiver.setSerialFile(serial);
     	_receiver.updateSchool( (School) obj.readObject() );
     	String text = _receiver.showAllNotifications();
         if(text != "") {
